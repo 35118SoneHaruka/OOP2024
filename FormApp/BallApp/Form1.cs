@@ -1,6 +1,7 @@
 namespace BallApp {
     public partial class Form1 : Form {
         SoccerBall soccerBall;
+        TennisBall tennisball;
         PictureBox pb;
 
         public Form1() {
@@ -23,13 +24,16 @@ namespace BallApp {
 
         private void Form1_MouseClick(object sender, MouseEventArgs e) {
              pb = new PictureBox(); //画像を表示するコントロール
-            pb.Size = new Size(50, 50);
-            soccerBall = new SoccerBall(e.X,e.Y);
-
-            pb.Image = soccerBall.Image;
-            pb.Location = new Point((int)soccerBall.PosX,(int)soccerBall.PosY);
+            if(e.Button == MouseButtons.Left) {
+                 pb.Size = new Size(50, 50);
+                soccerBall = new SoccerBall(e.X, e.Y);
+                pb.Image = soccerBall.Image;
+                pb.Location = new Point((int)soccerBall.PosX, (int)soccerBall.PosY);
+            }
+   
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
             pb.Parent = this;
+
             timer1.Start();
         }
     }
