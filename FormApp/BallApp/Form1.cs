@@ -1,7 +1,10 @@
 namespace BallApp {
     public partial class Form1 : Form {
-        Obj ball;
-        PictureBox pb;
+        
+        //Listコレクション
+        private List<Obj> balls = new List<Obj>();//ボールインスタンス格納用
+        private List<PictureBox> pbs = new List<PictureBox>();//表示用
+
 
         public Form1() {
             InitializeComponent();
@@ -17,15 +20,21 @@ namespace BallApp {
 
 
         private void timer1_Tick(object sender, EventArgs e) {
-               ball.Move();
-                pb.Location = new Point((int)ball.PosX, (int)ball.PosY);
+               /*ball.Move();
+                pb.Location = new Point((int)ball.PosX, (int)ball.PosY);*/
+            for (int i = 0; i < balls.Count; i++) {
+                balls[i].Move();
+                pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
+            }
          
 
 
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e) {
-             pb = new PictureBox(); //画像を表示するコントロール
+
+            PictureBox pb = new PictureBox();   //画像を表示するコントロール
+            Obj ball =null;
             if(e.Button == MouseButtons.Left) {
                  pb.Size = new Size(50, 50);
                 ball = new SoccerBall(e.X, e.Y);
@@ -40,7 +49,8 @@ namespace BallApp {
             pb.SizeMode = PictureBoxSizeMode.StretchImage;
             pb.Parent = this;
             timer1.Start();
-
+            balls.Add(ball);
+            pbs.Add(pb);
 
         }
     }
