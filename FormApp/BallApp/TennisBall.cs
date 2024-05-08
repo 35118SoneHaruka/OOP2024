@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BallApp {
     internal class TennisBall : Obj {
         public TennisBall(double xp, double yp)
-        : base(xp, yp, @"Picture\tennis_ball.png"){
+        : base(xp -15, yp -15, @"Picture\tennis_ball.png"){
 
             MoveX = 10;//移動量設定
             MoveY = 10;
@@ -19,7 +19,7 @@ namespace BallApp {
             MoveX = -MoveX;
         }
 
-        if (PosY > 500 || PosY < 0) {
+        if (PosY > 540 || PosY < 0) {
             MoveY = -MoveY;
         }
 
