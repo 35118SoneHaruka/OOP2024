@@ -14,6 +14,7 @@ namespace BallApp {
 
         //フォームが最初にロードされとき一度だけ実行される
         private void Form1_Load(object sender, EventArgs e) {
+            this.Text = "BallApp SoccerBall:0 TennisBall:0" ;
             //this.BackColor = Color.Green;
             
         }
@@ -51,6 +52,8 @@ namespace BallApp {
             timer1.Start();
             balls.Add(ball);
             pbs.Add(pb);
+
+            this.Text = "BallApp SoccerBall:" + SoccerBall.Count + "TennisBall:" +  TennisBall.Count;
 
         }
     }
