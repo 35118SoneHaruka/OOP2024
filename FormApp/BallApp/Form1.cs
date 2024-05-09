@@ -1,9 +1,13 @@
 namespace BallApp {
     public partial class Form1 : Form {
-        
+
         //Listコレクション
         private List<Obj> balls = new List<Obj>();//ボールインスタンス格納用
         private List<PictureBox> pbs = new List<PictureBox>();//表示用
+
+        //バー用
+        private Bar bar;
+        private PictureBox pbBar;
 
 
         public Form1() {
@@ -14,36 +18,42 @@ namespace BallApp {
 
         //フォームが最初にロードされとき一度だけ実行される
         private void Form1_Load(object sender, EventArgs e) {
-            this.Text = "BallApp SoccerBall:0 TennisBall:0" ;
+            this.Text = "BallApp SoccerBall:0 TennisBall:0";
             //this.BackColor = Color.Green;
-            
+
+            bar = new Bar(340, 500);
+            pbBar = new PictureBox();
+            pbBar.Image = bar.Image;
+            pbBar.Location = new Point((int)bar.PosX, (int)bar.PosY);
+            pbBar.Size = new Size(150, 10);
+            pbBar.Parent = this;
         }
 
 
         private void timer1_Tick(object sender, EventArgs e) {
-               /*ball.Move();
-                pb.Location = new Point((int)ball.PosX, (int)ball.PosY);*/
+            /*ball.Move();
+             pb.Location = new Point((int)ball.PosX, (int)ball.PosY);*/
             for (int i = 0; i < balls.Count; i++) {
                 balls[i].Move();
                 pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
             }
-         
+
 
 
         }
-
+        //マウスクリックイベントハンドラ
         private void Form1_MouseClick(object sender, MouseEventArgs e) {
 
             PictureBox pb = new PictureBox();   //画像を表示するコントロール
-            Obj ball =null;
-            if(e.Button == MouseButtons.Left) {
-                 pb.Size = new Size(50, 50);
+            Obj ball = null;
+            if (e.Button == MouseButtons.Left) {
+                pb.Size = new Size(50, 50);
                 ball = new SoccerBall(e.X, e.Y);
-               
+
             } else if (e.Button == MouseButtons.Right) {
                 pb.Size = new Size(30, 30);
                 ball = new TennisBall(e.X, e.Y);
-                
+
             }
             pb.Image = ball.Image;
             pb.Location = new Point((int)ball.PosX, (int)ball.PosY);
@@ -53,7 +63,13 @@ namespace BallApp {
             balls.Add(ball);
             pbs.Add(pb);
 
-            this.Text = "BallApp SoccerBall:" + SoccerBall.Count + "TennisBall:" +  TennisBall.Count;
+            this.Text = "BallApp SoccerBall:" + SoccerBall.Count + "TennisBall:" + TennisBall.Count;
+
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e) {
+            bar.Move(e.KeyData);
+            pbBar.Location = new Point((int)bar.PosX, (int)bar.PosY);
 
         }
     }
