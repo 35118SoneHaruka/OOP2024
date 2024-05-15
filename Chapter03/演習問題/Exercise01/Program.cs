@@ -35,7 +35,10 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_3(List<int> numbers) {
-            
+            var where = numbers.Where(n => 50 <= n);
+            foreach (var n in where) {
+                Console.WriteLine(n);
+            }
         }
 
         private static void Exercise1_4(List<int> numbers) {
