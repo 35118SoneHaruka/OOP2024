@@ -39,6 +39,7 @@ namespace Exercise01 {
             foreach (var n in where) {
                 Console.WriteLine(n);
             }
+            //numbers.Where(n => 50 <= n).ToList().ForEach(n => Console.WriteLine(n));
         }
 
         private static void Exercise1_4(List<int> numbers) {
@@ -46,6 +47,7 @@ namespace Exercise01 {
             foreach (var n in select) {
                 Console.WriteLine(n);
             }
+            //numbers.Select(n => n * 2).ToList().ForEach(n => Console.WriteLine(n));
         }
     }
 }
