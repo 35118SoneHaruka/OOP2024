@@ -49,8 +49,8 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_2(List<string> names) {
-            int query = names.Count(s => s.Contains('o'));
-            Console.WriteLine("oを含む文字列の個数は" + count);
+            var query = names.Count(s => s.Contains('o'));
+            Console.WriteLine("oを含む文字列の個数は" + query);
 
         }
 
