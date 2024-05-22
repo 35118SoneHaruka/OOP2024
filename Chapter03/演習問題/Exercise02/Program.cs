@@ -62,7 +62,12 @@ namespace Exercise02 {
         }
      
         private static void Exercise2_4(List<string> names) {
-
+           IEnumerable<int> query = names.Where(s => s[0] == 'B').Select(s => s.Count());
+            Console.WriteLine("Bで始まる都市名の文字数");
+            foreach (int i in query) {
+                Console.WriteLine(i);
+            }
+            
         }
     }
 }
