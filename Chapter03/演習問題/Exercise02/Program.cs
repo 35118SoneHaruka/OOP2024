@@ -56,7 +56,9 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_3(List<string> names) {
-
+            char ch = 'o';
+            Console.WriteLine(ch + "を含む文字を出力");
+            names.Where(s => s.Contains(ch)).ToList().ForEach(s => Console.WriteLine(s));
         }
      
         private static void Exercise2_4(List<string> names) {
