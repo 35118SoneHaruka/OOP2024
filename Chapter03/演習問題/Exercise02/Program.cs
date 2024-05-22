@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,13 +49,16 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_2(List<string> names) {
+            char ch = 'o';
+            int count = names.Count(s => s.Contains(ch) );
+            Console.WriteLine(ch + "を含む文字列の個数は"+count);
 
         }
 
         private static void Exercise2_3(List<string> names) {
 
         }
-
+     
         private static void Exercise2_4(List<string> names) {
 
         }
