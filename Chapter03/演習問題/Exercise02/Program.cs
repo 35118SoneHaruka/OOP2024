@@ -49,24 +49,27 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_2(List<string> names) {
-            int count = names.Count(s => s.Contains('o') );
-            Console.WriteLine( "oを含む文字列の個数は"+count);
+            int query = names.Count(s => s.Contains('o'));
+            Console.WriteLine("oを含む文字列の個数は" + count);
 
         }
 
         private static void Exercise2_3(List<string> names) {
             char ch = 'o';
             Console.WriteLine(ch + "を含む文字を出力");
-            names.Where(s => s.Contains(ch)).ToList().ForEach(s => Console.WriteLine(s));
+            var query = names.Where(s => s.Contains(ch)).ToArray();
+            foreach (var item in query) {
+                Console.WriteLine(item);
+            }
         }
-     
+
         private static void Exercise2_4(List<string> names) {
-           IEnumerable<int> query = names.Where(s => s[0] == 'B').Select(s => s.Count());
+            IEnumerable<int> query = names.Where(s => s[0] == 'B').Select(s => s.Count());
             Console.WriteLine("Bで始まる都市名の文字数");
             foreach (int i in query) {
                 Console.WriteLine(i);
             }
-            
+
         }
     }
 }
