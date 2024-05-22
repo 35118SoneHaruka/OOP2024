@@ -49,9 +49,8 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_2(List<string> names) {
-            char ch = 'o';
-            int count = names.Count(s => s.Contains(ch) );
-            Console.WriteLine(ch + "を含む文字列の個数は"+count);
+            int count = names.Count(s => s.Contains('o') );
+            Console.WriteLine( "oを含む文字列の個数は"+count);
 
         }
 
