@@ -34,11 +34,18 @@ namespace Exercise01 {
                 month = 1;
             }
             return new YearMonth(year, month);
+
+            /*if(Month == 12) {
+                return new YearMonth(year +1, 1);
+            } else {
+                return new YearMonth(year, Month + 1);
+            }*/
         }
 
         //4.1.4
         public override string ToString() {
             return Year + "年" + Month + "月";
+            //return $"{Year}年{Month}月"
 
         }
     }
