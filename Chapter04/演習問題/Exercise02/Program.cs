@@ -57,7 +57,7 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_5(YearMonth[] ymCollection) {
-
+           
         }
     }
 }
