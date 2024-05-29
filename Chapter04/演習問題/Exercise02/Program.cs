@@ -48,17 +48,26 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_4(YearMonth[] ymCollection) {
-            if(Exercise2_3(ymCollection)== null) {
+            if (Exercise2_3(ymCollection) == null) {
                 Console.WriteLine("21世紀のデータはありません");
             } else {
-                Console.WriteLine(Exercise2_3(ymCollection) );
+                Console.WriteLine(Exercise2_3(ymCollection));
             }
+
+            /*var ym = Exercise2_3(ymCollection);
+            Console.WriteLine(ym == null ? "21世紀のデータはありません" : ym.ToString());*/
 
         }
 
         private static void Exercise2_5(YearMonth[] ymCollection) {
-            foreach (var item in ymCollection) {
+            /*foreach (var item in ymCollection) {
                 Console.WriteLine(item.AddOneMonth());
+            }*/
+
+             var array = ymCollection.Select(n => n.AddOneMonth()).ToArray();
+            foreach (var item in array) {
+                Console.WriteLine(item);
+
             }
         }
     }
