@@ -41,10 +41,13 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<Book> books) {
-
+            var str = books.FirstOrDefault(x => x.Title == "ワンダフル・C#ライフ");
+            Console.WriteLine("商品価格："+str.Price);
+            Console.WriteLine("値段："+str.Pages);
         }
 
         private static void Exercise2_2(List<Book> books) {
+            
         }
 
         private static void Exercise2_3(List<Book> books) {
