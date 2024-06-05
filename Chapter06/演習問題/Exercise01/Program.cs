@@ -43,10 +43,17 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4(int[] numbers) {
+            var sort = numbers.OrderBy(x => x);
+            var nums = sort.Take(3).ToArray();
+            foreach (var item in nums) {
+                Console.WriteLine(item);
+
+            }
 
         }
 
         private static void Exercise1_5(int[] numbers) {
+
         }
     }
 }
