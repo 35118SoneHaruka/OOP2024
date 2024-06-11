@@ -6,67 +6,83 @@ using System.Threading.Tasks;
 
 namespace Section01 {
     internal class Program {
+        static private Dictionary<string, string> prefOfficeDict = new Dictionary<string, string>();
         static void Main(string[] args) {
-            var prefectureDict = new Dictionary<string, string>();
+            
+            //入力処理
+            addPrefecture();
 
-            for (int i = 1; i <= 5; i++) {
-                Console.WriteLine("県庁所在地の登録" + i);
-                Console.Write("都道府県：");
-                var prefecture = Console.ReadLine();
-                string prefecturalOffice;
-                if (prefectureDict.ContainsKey(prefecture)) {
-                    Console.WriteLine("上書きしますか");
-                    Console.WriteLine("1:yes");
-                    Console.WriteLine("2:no");
-                    if (int.Parse(Console.ReadLine()) == 1) {
-                        Console.Write("県庁所在地：");
-                        prefecturalOffice = Console.ReadLine();
-                        prefectureDict[prefecture] = prefecturalOffice;
-                    }
+            Boolean endFlag = false;    //終了フラグ（無限ループを抜け出す用）
+            while (true) {
+                string menuSelect = menuDisp();
+                switch (menuSelect) {
+                    case "1":
+                        //一覧出力処理
+                        prefectureWrite();
+                        break;
 
-                } else {
-                    Console.Write("県庁所在地：");
-                    prefecturalOffice = Console.ReadLine();
-                    prefectureDict.Add(prefecture, prefecturalOffice);
+                    case "2":
+                        //都道府県の入力
+                        searchPrefecture();
+                        break;
+
+                    case "9":
+                        endFlag = true; //終了フラグＯＮ
+                        break;
+                }
+                if (endFlag) {
+                    break;
+                }
+            }
+        }
+
+        private static void addPrefecture() {
+            Console.WriteLine("県庁所在地の登録");
+            while (true) {
+                //都道府県の入力
+                Console.Write("都道府県:");
+                String pref = Console.ReadLine();
+                if (pref == null) {
+                    break;                
                 }
 
+                //県庁所在地の入力
+                Console.Write("県庁所在地:");
+                String prefCaptalLocation = Console.ReadLine();
 
-            }
-
-            Console.WriteLine();
-
-            Console.WriteLine("*メニュー*");
-            Console.WriteLine("1:一覧表示");
-            Console.WriteLine("2:検索");
-            Console.WriteLine("9:終了");
-            Console.Write("数字を入力してください(半角)：");
-            Console.WriteLine();
-
-            var select = int.Parse(Console.ReadLine());
-
-            while (select != 9) {
-                if (select == 1) {
-                    foreach (var prefecture in prefectureDict) {
-                        Console.WriteLine("{0}の県庁所在地は{1}です", prefecture.Key, prefecture.Value);
+                //既に都道府県が登録されているか？
+                if (prefOfficeDict.ContainsKey(pref)) {
+                    //登録済み
+                    Console.WriteLine("上書きしますか？(Y/N)");
+                    if (Console.ReadLine() == "N") {
+                        continue;
                     }
-                }else if(select == 2) {
-                    Console.Write("都道府県：");
-                    var prefecture1 = Console.ReadLine();
-                    if (prefectureDict.ContainsKey(prefecture1)) {
-                        Console.WriteLine("県庁所在地:" + prefectureDict[prefecture1]);
-                    }
-                    
                 }
-                Console.WriteLine("*メニュー*");
-                Console.WriteLine("1:一覧表示");
-                Console.WriteLine("2:検索");
-                Console.WriteLine("9:終了");
-                Console.Write("数字を入力してください(半角)：");
-                select = int.Parse(Console.ReadLine());
-                Console.WriteLine();
-
+                prefOfficeDict[pref] = prefCaptalLocation;
             }
-            Console.WriteLine("終了します");
+            Console.WriteLine();//改行
+        }
+
+        private static void searchPrefecture() {
+            Console.Write("都道府県:");
+            String searchPref = Console.ReadLine();
+            Console.WriteLine(searchPref + "の県庁所在地は" + prefOfficeDict[searchPref] + "です");
+        }
+
+        private static void prefectureWrite() {
+            foreach (var item in prefOfficeDict) {
+                Console.WriteLine("{0}の県庁所在地は{1}です。", item.Key, item.Value);
+            }
+        }
+
+        private static string menuDisp() {
+            Console.WriteLine("**** メニュー ****");
+            Console.WriteLine("1：一覧表示");
+            Console.WriteLine("2：検索");
+            Console.WriteLine("9：終了");
+            Console.Write(">");
+            String menuSelect = Console.ReadLine();
+            return menuSelect;
         }
     }
 }
