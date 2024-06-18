@@ -126,7 +126,7 @@ namespace Test02 {
         //　　　　　　　　　沖田宏一 59kg
         //　　　　　　　　　片山伸介 65kg】
         private static void Exercise07(List<Person> persons) {
-            var num = persons.Where(n => n.Weight <= 70).ToArray();
+            var num = persons.Where(n => n.Weight <= 70);
             foreach (var item in num) {
                 Console.WriteLine("{0} {1}kg",item.Name,item.Weight);
             }
