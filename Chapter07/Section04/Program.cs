@@ -27,11 +27,16 @@ namespace Section04 {
             Console.WriteLine();
 
             //7.2.4
-            var abbreviations = abbrs.Where(x => x.Key.Length == 3);
-            foreach (var abbr in abbreviations) {
-                Console.WriteLine(abbr.Key + "=" + abbr.Value);
+            //var abbreviations = abbrs.Where(x => x.Key.Length == 3);
+            //foreach (var abbr in abbreviations) {
+            //    Console.WriteLine(abbr.Key + "=" + abbr.Value);
+            //}
+            //Console.WriteLine();
+
+            foreach (var abbr in abbrs.Where(x => x.Key.Length == 3)) {
+                Console.WriteLine("{0} = {1}",abbr.Key,abbr.Value);
+
             }
-            Console.WriteLine();
 
 
             // インデクサの利用例
