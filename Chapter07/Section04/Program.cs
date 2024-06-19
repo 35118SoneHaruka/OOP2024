@@ -14,6 +14,12 @@ namespace Section04 {
             abbrs.Add("IOC", "国際オリンピック委員会");
             abbrs.Add("NPT", "核兵器不拡散条約");
 
+            //7.2.3(Count呼び出し)
+            Console.WriteLine(abbrs.CountDict);
+
+            //7.2.3(Remove呼び出し)
+            Console.WriteLine(abbrs.Remove("FIBA"));
+
             // インデクサの利用例
             var names = new[] { "WHO", "FIFA", "NPT", };
             foreach (var name in names) {
