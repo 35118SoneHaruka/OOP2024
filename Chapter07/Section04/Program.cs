@@ -18,11 +18,12 @@ namespace Section04 {
             Console.WriteLine(abbrs.CountDict);
 
             //7.2.3(Remove呼び出し)
-            if (abbrs.Remove("FIBA")) {
+            if (abbrs.Remove("APEC")) {
                 Console.WriteLine("削除できました");
             } else {
                 Console.WriteLine("削除できませんでした");
             }
+           
 
             // インデクサの利用例
             var names = new[] { "WHO", "FIFA", "NPT", };
