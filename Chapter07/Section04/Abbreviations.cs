@@ -15,6 +15,9 @@ namespace Section04 {
         public int CountDict { get { return _dict.Count(); } }
 
         //7.2.2(Removeメソッドの作成)
+        public bool Remove(string name) {
+            return _dict.ContainsKey(name);
+        }
         
 
         // コンストラクタ
