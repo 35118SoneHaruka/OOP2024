@@ -18,12 +18,21 @@ namespace Section04 {
             Console.WriteLine(abbrs.CountDict);
 
             //7.2.3(Remove呼び出し)
-            if (abbrs.Remove("APEC")) {
+            if (abbrs.Remove("NPT")) {
                 Console.WriteLine("削除できました");
             } else {
                 Console.WriteLine("削除できませんでした");
             }
-           
+
+            Console.WriteLine();
+
+            //7.2.4
+            var abbreviations = abbrs.Where(x => x.Key.Length == 3);
+            foreach (var abbr in abbreviations) {
+                Console.WriteLine(abbr.Key + "=" + abbr.Value);
+            }
+            Console.WriteLine();
+
 
             // インデクサの利用例
             var names = new[] { "WHO", "FIFA", "NPT", };
@@ -39,10 +48,10 @@ namespace Section04 {
             // ToAbbreviationメソッドの利用例
             var japanese = "東南アジア諸国連合";
             var abbreviation = abbrs.ToAbbreviation(japanese);
-            if (abbreviation == null)
+            if (abbreviations == null)
                 Console.WriteLine("{0} は見つかりません", japanese);
             else
-                Console.WriteLine("「{0}」の略語は {1} です", japanese, abbreviation);
+                Console.WriteLine("「{0}」の略語は {1} です", japanese, abbreviations);
             Console.WriteLine();
 
             // FindAllメソッドの利用例
