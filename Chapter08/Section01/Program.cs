@@ -19,10 +19,16 @@ namespace Section01 {
 
             var dt1 = new DateTime(year, month, day);
 
-            //var dayOfWeek = dt1.DayOfWeek;
+            Console.WriteLine("あなたは{0}に生まれました",dt1.ToString("dddd"));
 
-            CultureInfo japaneseCulture = new CultureInfo("ja-JP");
-            Console.WriteLine("あなたは{0}に生まれました", dt1.ToString("dddd",japaneseCulture));
+
+
+
+
+
+
+            //CultureInfo japaneseCulture = new CultureInfo("ja-JP");
+            //Console.WriteLine("あなたは{0}に生まれました", dt1.ToString("dddd",japaneseCulture));
             //if(dayOfWeek == DayOfWeek.Monday) {
             //    Console.WriteLine("あなたは月曜日に生まれました");
             //}
@@ -45,7 +51,7 @@ namespace Section01 {
             //    Console.WriteLine("あなたは日曜日に生まれました");
             //}
 
-            
+
         }
     }
 }
