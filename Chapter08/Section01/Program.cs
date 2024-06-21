@@ -18,38 +18,24 @@ namespace Section01 {
             var day = int.Parse(Console.ReadLine());
 
             var dt1 = new DateTime(year, month, day);
+            var dt2 = DateTime.Today;
 
-            Console.WriteLine("あなたは{0}に生まれました",dt1.ToString("dddd"));
+            //あなたは平成○○年〇月〇日〇曜日に生まれました
+
+            var culture = new CultureInfo("ja-JP");
+            culture.DateTimeFormat.Calendar = new JapaneseCalendar();
+            var str = dt1.ToString("ggyy年M月d日dddd",culture);
+            Console.WriteLine("あなたは{0}に生まれました",str);
+
+            //あなたは生まれてから今日で〇〇〇〇日目です
+
+            TimeSpan diff = dt2.Date - dt1.Date;
+            Console.WriteLine("あなたは生まれてから今日で{0}日目です", diff.Days);
 
 
 
+           
 
-
-
-
-            //CultureInfo japaneseCulture = new CultureInfo("ja-JP");
-            //Console.WriteLine("あなたは{0}に生まれました", dt1.ToString("dddd",japaneseCulture));
-            //if(dayOfWeek == DayOfWeek.Monday) {
-            //    Console.WriteLine("あなたは月曜日に生まれました");
-            //}
-            //if (dayOfWeek == DayOfWeek.Tuesday) {
-            //    Console.WriteLine("あなたは火曜日に生まれました");
-            //}
-            //if (dayOfWeek == DayOfWeek.Wednesday) {
-            //    Console.WriteLine("あなたは水曜日に生まれました");
-            //}
-            //if (dayOfWeek == DayOfWeek.Thursday) {
-            //    Console.WriteLine("あなたは木曜日に生まれました");
-            //}
-            //if (dayOfWeek == DayOfWeek.Friday) {
-            //    Console.WriteLine("あなたは金曜日に生まれました");
-            //}
-            //if (dayOfWeek == DayOfWeek.Saturday) {
-            //    Console.WriteLine("あなたは土曜日に生まれました");
-            //}
-            //if (dayOfWeek == DayOfWeek.Sunday) {
-            //    Console.WriteLine("あなたは日曜日に生まれました");
-            //}
 
 
         }
