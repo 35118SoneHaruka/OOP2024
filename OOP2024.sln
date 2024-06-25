@@ -91,6 +91,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter08", "Chapter08", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Section01", "Chapter08\Section01\Section01.csproj", "{A4BB5EE7-2A8F-4F6B-970E-ABC99A779390}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateTimeApp", "FormApp\DateTimeApp\DateTimeApp.csproj", "{2A64AA73-D56E-4A35-901E-C0EA56D41A12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -205,6 +207,10 @@ Global
 		{A4BB5EE7-2A8F-4F6B-970E-ABC99A779390}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4BB5EE7-2A8F-4F6B-970E-ABC99A779390}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4BB5EE7-2A8F-4F6B-970E-ABC99A779390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A64AA73-D56E-4A35-901E-C0EA56D41A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A64AA73-D56E-4A35-901E-C0EA56D41A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A64AA73-D56E-4A35-901E-C0EA56D41A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A64AA73-D56E-4A35-901E-C0EA56D41A12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -244,6 +250,7 @@ Global
 		{B7D33469-04B8-48E4-BED9-23C19BC33D4D} = {9FBC54B6-84D7-4A7F-877F-9EBD86E830D6}
 		{681BD14D-8334-423B-A685-86199FDC1F6A} = {9FBC54B6-84D7-4A7F-877F-9EBD86E830D6}
 		{A4BB5EE7-2A8F-4F6B-970E-ABC99A779390} = {EF6456D4-BA81-430D-AD71-0087D0CD6ADE}
+		{2A64AA73-D56E-4A35-901E-C0EA56D41A12} = {9624AA7F-9EEF-4A19-B572-F71E099C4F8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0069BB43-55D4-4FC9-BE89-A585C1AED094}
