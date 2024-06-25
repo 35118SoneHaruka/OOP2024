@@ -25,7 +25,7 @@
         private void InitializeComponent() {
             label1 = new Label();
             btDateCount = new Button();
-            dtpBirthday = new DateTimePicker();
+            dtpDay = new DateTimePicker();
             tbDisp = new TextBox();
             nudDay = new NumericUpDown();
             btDayBefore = new Button();
@@ -54,14 +54,14 @@
             btDateCount.UseVisualStyleBackColor = true;
             btDateCount.Click += btDateCount_Click;
             // 
-            // dtpBirthday
+            // dtpDay
             // 
-            dtpBirthday.CalendarFont = new Font("Yu Gothic UI", 18F);
-            dtpBirthday.Font = new Font("Yu Gothic UI", 15F);
-            dtpBirthday.Location = new Point(118, 35);
-            dtpBirthday.Name = "dtpBirthday";
-            dtpBirthday.Size = new Size(174, 34);
-            dtpBirthday.TabIndex = 1;
+            dtpDay.CalendarFont = new Font("Yu Gothic UI", 18F);
+            dtpDay.Font = new Font("Yu Gothic UI", 15F);
+            dtpDay.Location = new Point(118, 35);
+            dtpDay.Name = "dtpDay";
+            dtpDay.Size = new Size(174, 34);
+            dtpDay.TabIndex = 1;
             // 
             // tbDisp
             // 
@@ -104,12 +104,14 @@
             // 
             // btAge
             // 
+            btAge.Font = new Font("Yu Gothic UI", 18F);
             btAge.Location = new Point(298, 145);
             btAge.Name = "btAge";
             btAge.Size = new Size(94, 47);
             btAge.TabIndex = 5;
             btAge.Text = "年齢";
             btAge.UseVisualStyleBackColor = true;
+            btAge.Click += btAge_Click;
             // 
             // Form1
             // 
@@ -121,7 +123,7 @@
             Controls.Add(btDayBefore);
             Controls.Add(nudDay);
             Controls.Add(tbDisp);
-            Controls.Add(dtpBirthday);
+            Controls.Add(dtpDay);
             Controls.Add(btDateCount);
             Controls.Add(label1);
             Name = "Form1";
@@ -135,7 +137,7 @@
 
         private Label label1;
         private Button btDateCount;
-        private DateTimePicker dtpBirthday;
+        private DateTimePicker dtpDay;
         private TextBox tbDisp;
         private NumericUpDown nudDay;
         private Button btDayBefore;

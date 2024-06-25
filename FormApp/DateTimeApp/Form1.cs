@@ -10,22 +10,37 @@ namespace DateTimeApp {
 
             var today = DateTime.Today;
 
-            TimeSpan diff = today - dtpBirthday.Value;
+            TimeSpan diff = today - dtpDay.Value;
 
             tbDisp.Text = (diff.Days + 1) + "“ú–Ú";
 
         }
 
         private void btDayBefore_Click(object sender, EventArgs e) {
-            var past = dtpBirthday.Value.AddDays(-(double)nudDay.Value);
+            var past = dtpDay.Value.AddDays(-(double)nudDay.Value);
 
             tbDisp.Text = past.ToString("D");
         }
 
         private void btDayAfter_Click(object sender, EventArgs e) {
-            var future = dtpBirthday.Value.AddDays((double)nudDay.Value);
+            var future = dtpDay.Value.AddDays((double)nudDay.Value);
 
             tbDisp.Text = future.ToString("D");
+        }
+
+        private void btAge_Click(object sender, EventArgs e) {
+            var today = DateTime.Today;
+            var age = GetAge(dtpDay.Value,today);
+            
+            tbDisp.Text = age + "Î";
+        }
+
+        public static int GetAge(DateTime birthday,DateTime targetDay) {
+            var age = targetDay.Year - birthday.Year;
+            if(targetDay.AddDays(1) > birthday.AddYears(age)) {
+                age--;
+            }
+            return age;
         }
     }
 }
