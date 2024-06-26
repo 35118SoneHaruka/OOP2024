@@ -30,17 +30,19 @@ namespace DateTimeApp {
 
         private void btAge_Click(object sender, EventArgs e) {
             var today = DateTime.Today;
-            var age = GetAge(dtpDay.Value,today);
-            
+            var age = GetAge(dtpDay.Value, today);
+
             tbDisp.Text = age + "Î";
         }
 
-        public static int GetAge(DateTime birthday,DateTime targetDay) {
+        public static int GetAge(DateTime birthday, DateTime targetDay) {
             var age = targetDay.Year - birthday.Year;
-            if(targetDay.AddDays(1) > birthday.AddYears(age)) {
+            if (targetDay.AddDays(1) > birthday.AddYears(age)) {
                 age--;
             }
             return age;
         }
+
+        
     }
 }
