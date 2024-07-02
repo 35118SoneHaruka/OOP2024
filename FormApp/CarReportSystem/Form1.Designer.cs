@@ -50,6 +50,7 @@
             dgvCarReport = new DataGridView();
             btReportOpen = new Button();
             btReportSave = new Button();
+            ofdPicFileOpen = new OpenFileDialog();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
@@ -139,7 +140,7 @@
             groupBox2.Controls.Add(rbHonda);
             groupBox2.Controls.Add(rbNissan);
             groupBox2.Controls.Add(rbToyota);
-            groupBox2.Location = new Point(106, 132);
+            groupBox2.Location = new Point(111, 130);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(386, 37);
             groupBox2.TabIndex = 4;
@@ -237,6 +238,7 @@
             btPicOpen.TabIndex = 7;
             btPicOpen.Text = "開く...";
             btPicOpen.UseVisualStyleBackColor = true;
+            btPicOpen.Click += btPicOpen_Click;
             // 
             // btPicDelete
             // 
@@ -246,6 +248,7 @@
             btPicDelete.TabIndex = 8;
             btPicDelete.Text = "削除";
             btPicDelete.UseVisualStyleBackColor = true;
+            btPicDelete.Click += btPicDelete_Click;
             // 
             // pbPicture
             // 
@@ -253,6 +256,7 @@
             pbPicture.Location = new Point(533, 51);
             pbPicture.Name = "pbPicture";
             pbPicture.Size = new Size(258, 230);
+            pbPicture.SizeMode = PictureBoxSizeMode.Zoom;
             pbPicture.TabIndex = 9;
             pbPicture.TabStop = false;
             // 
@@ -260,7 +264,7 @@
             // 
             btAddReport.Location = new Point(521, 312);
             btAddReport.Name = "btAddReport";
-            btAddReport.Size = new Size(75, 23);
+            btAddReport.Size = new Size(75, 39);
             btAddReport.TabIndex = 7;
             btAddReport.Text = "追加";
             btAddReport.UseVisualStyleBackColor = true;
@@ -270,7 +274,7 @@
             // 
             btModifyReport.Location = new Point(627, 312);
             btModifyReport.Name = "btModifyReport";
-            btModifyReport.Size = new Size(75, 23);
+            btModifyReport.Size = new Size(75, 39);
             btModifyReport.TabIndex = 7;
             btModifyReport.Text = "修正";
             btModifyReport.UseVisualStyleBackColor = true;
@@ -279,7 +283,7 @@
             // 
             btDeleteReport.Location = new Point(735, 312);
             btDeleteReport.Name = "btDeleteReport";
-            btDeleteReport.Size = new Size(75, 23);
+            btDeleteReport.Size = new Size(75, 39);
             btDeleteReport.TabIndex = 7;
             btDeleteReport.Text = "削除";
             btDeleteReport.UseVisualStyleBackColor = true;
@@ -300,16 +304,19 @@
             dgvCarReport.AllowUserToDeleteRows = false;
             dgvCarReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCarReport.Location = new Point(106, 383);
+            dgvCarReport.MultiSelect = false;
             dgvCarReport.Name = "dgvCarReport";
             dgvCarReport.ReadOnly = true;
+            dgvCarReport.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCarReport.Size = new Size(730, 206);
             dgvCarReport.TabIndex = 10;
+            dgvCarReport.Click += dgvCarReport_Click;
             // 
             // btReportOpen
             // 
             btReportOpen.Location = new Point(18, 428);
             btReportOpen.Name = "btReportOpen";
-            btReportOpen.Size = new Size(75, 35);
+            btReportOpen.Size = new Size(75, 38);
             btReportOpen.TabIndex = 7;
             btReportOpen.Text = "開く...";
             btReportOpen.UseVisualStyleBackColor = true;
@@ -318,10 +325,14 @@
             // 
             btReportSave.Location = new Point(18, 469);
             btReportSave.Name = "btReportSave";
-            btReportSave.Size = new Size(75, 34);
+            btReportSave.Size = new Size(75, 37);
             btReportSave.TabIndex = 7;
             btReportSave.Text = "保存...";
             btReportSave.UseVisualStyleBackColor = true;
+            // 
+            // ofdPicFileOpen
+            // 
+            ofdPicFileOpen.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -351,6 +362,7 @@
             Controls.Add(label1);
             Name = "Form1";
             Text = "試乗レポート管理システム";
+            Load += Form1_Load;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).EndInit();
@@ -388,5 +400,6 @@
         private DataGridView dgvCarReport;
         private Button btReportOpen;
         private Button btReportSave;
+        private OpenFileDialog ofdPicFileOpen;
     }
 }
