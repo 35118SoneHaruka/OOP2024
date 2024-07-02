@@ -96,5 +96,14 @@ namespace CarReportSystem {
             listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
         }
 
+        private void btModifyReport_Click(object sender, EventArgs e) {
+            listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
+            listCarReports[dgvCarReport.CurrentRow.Index].Author = cbAuther.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Maker = GetRadioButtonMaker();
+            listCarReports[dgvCarReport.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Report = tbReport.Text;
+            listCarReports[dgvCarReport.CurrentRow.Index].Picture = pbPicture.Image;
+            dgvCarReport.Refresh();//データグリッドビューの更新
+        }
     }
 }
