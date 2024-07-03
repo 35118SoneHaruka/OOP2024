@@ -13,18 +13,23 @@ namespace CarReportSystem {
         }
 
         private void btAddReport_Click(object sender, EventArgs e) {
-            CarReport carReport = new CarReport {
-                Date = dtpDate.Value,
-                Author = cbAuther.Text,
-                Maker = GetRadioButtonMaker(),
-                CarName = cbCarName.Text,
-                Report = tbReport.Text,
-                Picture = pbPicture.Image,
-            };
-            listCarReports.Add(carReport);
-
-
+            if(cbAuther.Text != string.Empty) {
+                if(cbCarName.Text != string.Empty) {
+                    CarReport carReport = new CarReport {
+                        Date = dtpDate.Value,
+                        Author = cbAuther.Text,
+                        Maker = GetRadioButtonMaker(),
+                        CarName = cbCarName.Text,
+                        Report = tbReport.Text,
+                        Picture = pbPicture.Image,
+                    };
+                    listCarReports.Add(carReport);
+                    setCbAuthor(cbAuther.Text);
+                    setCbCarName(cbCarName.Text);
+                }
+            }
         }
+
         public CarReport.MakerGroup GetRadioButtonMaker() {
             if (rbToyota.Checked)
                 return CarReport.MakerGroup.トヨタ;
@@ -92,10 +97,11 @@ namespace CarReportSystem {
 
         }
 
+        //削除ボタン
         private void btDeleteReport_Click(object sender, EventArgs e) {
             listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
         }
-
+        //修正ボタン
         private void btModifyReport_Click(object sender, EventArgs e) {
             listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
             listCarReports[dgvCarReport.CurrentRow.Index].Author = cbAuther.Text;
@@ -105,5 +111,22 @@ namespace CarReportSystem {
             listCarReports[dgvCarReport.CurrentRow.Index].Picture = pbPicture.Image;
             dgvCarReport.Refresh();//データグリッドビューの更新
         }
+
+        //記録者の履歴をコンボボックスへ登録(重複なし)
+        private void setCbAuthor(string author) {
+            if(cbAuther.Items.IndexOf(cbAuther.Text) == -1) {
+                cbAuther.Items.Add(author);
+            }
+            
+        }
+
+        //車名の履歴をコンボボックスへ登録(重複なし)
+        private void setCbCarName(string name) {
+            if (cbCarName.Items.IndexOf(cbCarName.Text) == -1) {
+                cbCarName.Items.Add(name);
+            }
+        }
+
+
     }
 }
