@@ -13,9 +13,8 @@ namespace CarReportSystem {
         }
 
         private void btAddReport_Click(object sender, EventArgs e) {
-            if(cbAuther.Text != string.Empty) {
-                if(cbCarName.Text != string.Empty) {
-                    CarReport carReport = new CarReport {
+            if(cbAuther.Text != string.Empty && cbCarName.Text != string.Empty) {
+                CarReport carReport = new CarReport {
                         Date = dtpDate.Value,
                         Author = cbAuther.Text,
                         Maker = GetRadioButtonMaker(),
@@ -26,8 +25,11 @@ namespace CarReportSystem {
                     listCarReports.Add(carReport);
                     setCbAuthor(cbAuther.Text);
                     setCbCarName(cbCarName.Text);
-                }
+                tslbMessage.Text = "";
+                return;
+
             }
+            tslbMessage.Text = "記録者または車名の入力がありません";
         }
 
         public CarReport.MakerGroup GetRadioButtonMaker() {
@@ -99,10 +101,20 @@ namespace CarReportSystem {
 
         //削除ボタン
         private void btDeleteReport_Click(object sender, EventArgs e) {
+            if(dgvCarReport.CurrentRow == null) {
+                tslbMessage.Text = "データが登録されていません";
+                return;
+            }
             listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
+
+
         }
         //修正ボタン
         private void btModifyReport_Click(object sender, EventArgs e) {
+            if(dgvCarReport.CurrentRow == null ) {
+                tslbMessage.Text = "データが登録されていません";
+                return;
+            }
             listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
             listCarReports[dgvCarReport.CurrentRow.Index].Author = cbAuther.Text;
             listCarReports[dgvCarReport.CurrentRow.Index].Maker = GetRadioButtonMaker();
@@ -110,6 +122,7 @@ namespace CarReportSystem {
             listCarReports[dgvCarReport.CurrentRow.Index].Report = tbReport.Text;
             listCarReports[dgvCarReport.CurrentRow.Index].Picture = pbPicture.Image;
             dgvCarReport.Refresh();//データグリッドビューの更新
+
         }
 
         //記録者の履歴をコンボボックスへ登録(重複なし)
