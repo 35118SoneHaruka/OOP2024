@@ -260,8 +260,7 @@ namespace CarReportSystem {
         }
 
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
-            DialogResult result = MessageBox.Show("本当に終了しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("本当に終了しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                 Application.Exit();
         }
     }
