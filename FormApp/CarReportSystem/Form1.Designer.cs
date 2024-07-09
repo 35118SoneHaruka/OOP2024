@@ -48,22 +48,32 @@
             btDeleteReport = new Button();
             label7 = new Label();
             dgvCarReport = new DataGridView();
-            btReportOpen = new Button();
-            btReportSave = new Button();
             ofdPicFileOpen = new OpenFileDialog();
             statusStrip1 = new StatusStrip();
             tslbMessage = new ToolStripStatusLabel();
+            ofdReportFileOpen = new OpenFileDialog();
+            sfdReportFileSave = new SaveFileDialog();
+            btClearReport = new Button();
+            menuStrip1 = new MenuStrip();
+            ファイルToolStripMenuItem = new ToolStripMenuItem();
+            開くToolStripMenuItem = new ToolStripMenuItem();
+            保存ToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            色設定ToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            終了ToolStripMenuItem = new ToolStripMenuItem();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
             statusStrip1.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Yu Gothic UI", 14F);
-            label1.Location = new Point(42, 29);
+            label1.Location = new Point(42, 42);
             label1.Name = "label1";
             label1.Size = new Size(54, 25);
             label1.TabIndex = 0;
@@ -72,7 +82,7 @@
             // dtpDate
             // 
             dtpDate.Font = new Font("Yu Gothic UI", 14F);
-            dtpDate.Location = new Point(111, 29);
+            dtpDate.Location = new Point(111, 40);
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new Size(200, 32);
             dtpDate.TabIndex = 1;
@@ -152,6 +162,7 @@
             // rbOther
             // 
             rbOther.AutoSize = true;
+            rbOther.Checked = true;
             rbOther.Location = new Point(304, 12);
             rbOther.Name = "rbOther";
             rbOther.Size = new Size(56, 19);
@@ -167,7 +178,6 @@
             rbImport.Name = "rbImport";
             rbImport.Size = new Size(61, 19);
             rbImport.TabIndex = 4;
-            rbImport.TabStop = true;
             rbImport.Text = "輸入車";
             rbImport.UseVisualStyleBackColor = true;
             // 
@@ -178,7 +188,6 @@
             rbSubaru.Name = "rbSubaru";
             rbSubaru.Size = new Size(54, 19);
             rbSubaru.TabIndex = 3;
-            rbSubaru.TabStop = true;
             rbSubaru.Text = "スバル";
             rbSubaru.UseVisualStyleBackColor = true;
             // 
@@ -189,7 +198,6 @@
             rbHonda.Name = "rbHonda";
             rbHonda.Size = new Size(53, 19);
             rbHonda.TabIndex = 2;
-            rbHonda.TabStop = true;
             rbHonda.Text = "ホンダ";
             rbHonda.UseVisualStyleBackColor = true;
             // 
@@ -200,7 +208,6 @@
             rbNissan.Name = "rbNissan";
             rbNissan.Size = new Size(49, 19);
             rbNissan.TabIndex = 1;
-            rbNissan.TabStop = true;
             rbNissan.Text = "日産";
             rbNissan.UseVisualStyleBackColor = true;
             // 
@@ -211,12 +218,12 @@
             rbToyota.Name = "rbToyota";
             rbToyota.Size = new Size(50, 19);
             rbToyota.TabIndex = 0;
-            rbToyota.TabStop = true;
             rbToyota.Text = "トヨタ";
             rbToyota.UseVisualStyleBackColor = true;
             // 
             // tbReport
             // 
+            tbReport.BorderStyle = BorderStyle.FixedSingle;
             tbReport.Location = new Point(110, 239);
             tbReport.Multiline = true;
             tbReport.Name = "tbReport";
@@ -227,7 +234,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Yu Gothic UI", 10F);
-            label6.Location = new Point(533, 22);
+            label6.Location = new Point(533, 42);
             label6.Name = "label6";
             label6.Size = new Size(37, 19);
             label6.TabIndex = 6;
@@ -235,28 +242,32 @@
             // 
             // btPicOpen
             // 
-            btPicOpen.Location = new Point(611, 22);
+            btPicOpen.BackColor = Color.LightSkyBlue;
+            btPicOpen.FlatStyle = FlatStyle.Flat;
+            btPicOpen.Location = new Point(611, 40);
             btPicOpen.Name = "btPicOpen";
             btPicOpen.Size = new Size(75, 23);
             btPicOpen.TabIndex = 7;
             btPicOpen.Text = "開く...";
-            btPicOpen.UseVisualStyleBackColor = true;
+            btPicOpen.UseVisualStyleBackColor = false;
             btPicOpen.Click += btPicOpen_Click;
             // 
             // btPicDelete
             // 
-            btPicDelete.Location = new Point(716, 22);
+            btPicDelete.BackColor = Color.FromArgb(255, 128, 128);
+            btPicDelete.FlatStyle = FlatStyle.Flat;
+            btPicDelete.Location = new Point(716, 39);
             btPicDelete.Name = "btPicDelete";
             btPicDelete.Size = new Size(75, 23);
             btPicDelete.TabIndex = 8;
             btPicDelete.Text = "削除";
-            btPicDelete.UseVisualStyleBackColor = true;
+            btPicDelete.UseVisualStyleBackColor = false;
             btPicDelete.Click += btPicDelete_Click;
             // 
             // pbPicture
             // 
             pbPicture.BackColor = SystemColors.GradientInactiveCaption;
-            pbPicture.Location = new Point(533, 51);
+            pbPicture.Location = new Point(533, 76);
             pbPicture.Name = "pbPicture";
             pbPicture.Size = new Size(258, 230);
             pbPicture.SizeMode = PictureBoxSizeMode.Zoom;
@@ -265,32 +276,38 @@
             // 
             // btAddReport
             // 
+            btAddReport.BackColor = Color.LightSkyBlue;
+            btAddReport.FlatStyle = FlatStyle.Flat;
             btAddReport.Location = new Point(521, 312);
             btAddReport.Name = "btAddReport";
             btAddReport.Size = new Size(75, 39);
             btAddReport.TabIndex = 7;
             btAddReport.Text = "追加";
-            btAddReport.UseVisualStyleBackColor = true;
+            btAddReport.UseVisualStyleBackColor = false;
             btAddReport.Click += btAddReport_Click;
             // 
             // btModifyReport
             // 
+            btModifyReport.BackColor = Color.FromArgb(255, 255, 192);
+            btModifyReport.FlatStyle = FlatStyle.Flat;
             btModifyReport.Location = new Point(627, 312);
             btModifyReport.Name = "btModifyReport";
             btModifyReport.Size = new Size(75, 39);
             btModifyReport.TabIndex = 7;
             btModifyReport.Text = "修正";
-            btModifyReport.UseVisualStyleBackColor = true;
+            btModifyReport.UseVisualStyleBackColor = false;
             btModifyReport.Click += btModifyReport_Click;
             // 
             // btDeleteReport
             // 
+            btDeleteReport.BackColor = Color.FromArgb(255, 128, 128);
+            btDeleteReport.FlatStyle = FlatStyle.Flat;
             btDeleteReport.Location = new Point(735, 312);
             btDeleteReport.Name = "btDeleteReport";
             btDeleteReport.Size = new Size(75, 39);
             btDeleteReport.TabIndex = 7;
             btDeleteReport.Text = "削除";
-            btDeleteReport.UseVisualStyleBackColor = true;
+            btDeleteReport.UseVisualStyleBackColor = false;
             btDeleteReport.Click += btDeleteReport_Click;
             // 
             // label7
@@ -312,28 +329,11 @@
             dgvCarReport.MultiSelect = false;
             dgvCarReport.Name = "dgvCarReport";
             dgvCarReport.ReadOnly = true;
+            dgvCarReport.RowHeadersVisible = false;
             dgvCarReport.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCarReport.Size = new Size(730, 206);
             dgvCarReport.TabIndex = 10;
             dgvCarReport.Click += dgvCarReport_Click;
-            // 
-            // btReportOpen
-            // 
-            btReportOpen.Location = new Point(18, 428);
-            btReportOpen.Name = "btReportOpen";
-            btReportOpen.Size = new Size(75, 38);
-            btReportOpen.TabIndex = 7;
-            btReportOpen.Text = "開く...";
-            btReportOpen.UseVisualStyleBackColor = true;
-            // 
-            // btReportSave
-            // 
-            btReportSave.Location = new Point(18, 469);
-            btReportSave.Name = "btReportSave";
-            btReportSave.Size = new Size(75, 37);
-            btReportSave.TabIndex = 7;
-            btReportSave.Text = "保存...";
-            btReportSave.UseVisualStyleBackColor = true;
             // 
             // ofdPicFileOpen
             // 
@@ -345,6 +345,7 @@
             statusStrip1.Location = new Point(0, 615);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(849, 22);
+            statusStrip1.SizingGrip = false;
             statusStrip1.TabIndex = 11;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -353,19 +354,89 @@
             tslbMessage.Name = "tslbMessage";
             tslbMessage.Size = new Size(0, 17);
             // 
+            // ofdReportFileOpen
+            // 
+            ofdReportFileOpen.FileName = "openFileDialog1";
+            // 
+            // btClearReport
+            // 
+            btClearReport.BackColor = Color.FromArgb(255, 255, 192);
+            btClearReport.FlatStyle = FlatStyle.Flat;
+            btClearReport.Location = new Point(18, 422);
+            btClearReport.Name = "btClearReport";
+            btClearReport.Size = new Size(75, 39);
+            btClearReport.TabIndex = 12;
+            btClearReport.Text = "クリア";
+            btClearReport.UseVisualStyleBackColor = false;
+            btClearReport.Click += btClearReport_Click;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { ファイルToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(849, 24);
+            menuStrip1.TabIndex = 13;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // ファイルToolStripMenuItem
+            // 
+            ファイルToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 開くToolStripMenuItem, 保存ToolStripMenuItem, toolStripSeparator1, 色設定ToolStripMenuItem, toolStripSeparator2, 終了ToolStripMenuItem });
+            ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
+            ファイルToolStripMenuItem.Size = new Size(67, 20);
+            ファイルToolStripMenuItem.Text = "ファイル(&F)";
+            // 
+            // 開くToolStripMenuItem
+            // 
+            開くToolStripMenuItem.Name = "開くToolStripMenuItem";
+            開くToolStripMenuItem.Size = new Size(119, 22);
+            開くToolStripMenuItem.Text = "開く...";
+            開くToolStripMenuItem.Click += 開くToolStripMenuItem_Click;
+            // 
+            // 保存ToolStripMenuItem
+            // 
+            保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
+            保存ToolStripMenuItem.Size = new Size(119, 22);
+            保存ToolStripMenuItem.Text = "保存...";
+            保存ToolStripMenuItem.Click += 保存ToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(116, 6);
+            // 
+            // 色設定ToolStripMenuItem
+            // 
+            色設定ToolStripMenuItem.Name = "色設定ToolStripMenuItem";
+            色設定ToolStripMenuItem.Size = new Size(119, 22);
+            色設定ToolStripMenuItem.Text = "色設定...";
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(116, 6);
+            // 
+            // 終了ToolStripMenuItem
+            // 
+            終了ToolStripMenuItem.Name = "終了ToolStripMenuItem";
+            終了ToolStripMenuItem.Size = new Size(119, 22);
+            終了ToolStripMenuItem.Text = "終了";
+            終了ToolStripMenuItem.Click += 終了ToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(224, 224, 224);
             ClientSize = new Size(849, 637);
+            Controls.Add(btClearReport);
             Controls.Add(statusStrip1);
+            Controls.Add(menuStrip1);
             Controls.Add(dgvCarReport);
             Controls.Add(pbPicture);
             Controls.Add(btPicDelete);
             Controls.Add(btDeleteReport);
             Controls.Add(btModifyReport);
-            Controls.Add(btReportOpen);
-            Controls.Add(btReportSave);
             Controls.Add(btAddReport);
             Controls.Add(btPicOpen);
             Controls.Add(label6);
@@ -380,6 +451,9 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
             Load += Form1_Load;
@@ -389,6 +463,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).EndInit();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -420,10 +496,19 @@
         private Button btDeleteReport;
         private Label label7;
         private DataGridView dgvCarReport;
-        private Button btReportOpen;
-        private Button btReportSave;
         private OpenFileDialog ofdPicFileOpen;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel tslbMessage;
+        private OpenFileDialog ofdReportFileOpen;
+        private SaveFileDialog sfdReportFileSave;
+        private Button btClearReport;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem ファイルToolStripMenuItem;
+        private ToolStripMenuItem 開くToolStripMenuItem;
+        private ToolStripMenuItem 保存ToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem 色設定ToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem 終了ToolStripMenuItem;
     }
 }
