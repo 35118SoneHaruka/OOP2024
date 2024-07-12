@@ -1,12 +1,17 @@
 using System.ComponentModel;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
 
-        //カーレポート管理用リスト
-        BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+        Settings st = new Settings();
+
+    //カーレポート管理用リスト
+    BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
         //コンストラクタ
         public Form1() {
@@ -32,7 +37,6 @@ namespace CarReportSystem {
                 clearText();
                 dgvCarReport.ClearSelection();
                 return;
-
             }
             tslbMessage.Text = "記録者または車名の入力がありません";
         }
@@ -51,7 +55,6 @@ namespace CarReportSystem {
                 return CarReport.MakerGroup.輸入車;
 
             return CarReport.MakerGroup.その他;
-
         }
 
         //ラジオボタン　セット
@@ -80,8 +83,6 @@ namespace CarReportSystem {
                     break;
                 default:
                     break;
-
-
             }
         }
 
@@ -112,6 +113,24 @@ namespace CarReportSystem {
             //交互に色を設定(データグリッドビュー)
             dgvCarReport.RowsDefaultCellStyle.BackColor = Color.AliceBlue;
             dgvCarReport.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
+
+            //設定した色の読み込み
+            try {
+                using (var reader = XmlReader.Create("settings.xml")) {
+                    var serializer = new XmlSerializer(typeof(Settings));
+                    var settings = serializer.Deserialize(reader) as Settings;
+                    if (settings != null) {
+                        if (settings.MainFormColor != 0) {
+                            BackColor = Color.FromArgb(settings.MainFormColor);
+                            st = settings;
+                        }
+                    }
+                }
+            }
+            catch (Exception) {
+
+            }
+            
         }
 
         //データグリッドビューイベント
@@ -125,7 +144,6 @@ namespace CarReportSystem {
             cbCarName.Text = (string)dgvCarReport.CurrentRow.Cells["CarName"].Value;
             tbReport.Text = (string)dgvCarReport.CurrentRow.Cells["Report"].Value;
             pbPicture.Image = (Image)dgvCarReport.CurrentRow.Cells["picture"].Value;
-
         }
 
         //削除ボタン
@@ -133,20 +151,15 @@ namespace CarReportSystem {
             if (dgvCarReport.CurrentRow == null) return;
             if (!dgvCarReport.CurrentRow.Selected) return;
 
-
-
             listCarReports.RemoveAt(dgvCarReport.CurrentRow.Index);
             clearText();
-
-
-
         }
 
         //修正ボタン
         private void btModifyReport_Click(object sender, EventArgs e) {
             if (dgvCarReport.CurrentRow == null) return;
             if (!dgvCarReport.CurrentRow.Selected) return;
-            if (cbAuther.Text != string.Empty || cbCarName.Text != string.Empty) {
+            if (cbAuther.Text == string.Empty || cbCarName.Text == string.Empty) {
                 tslbMessage.Text = "記録者または車名の入力がありません";
                 return;
             }
@@ -158,7 +171,6 @@ namespace CarReportSystem {
             listCarReports[dgvCarReport.CurrentRow.Index].Report = tbReport.Text;
             listCarReports[dgvCarReport.CurrentRow.Index].Picture = pbPicture.Image;
             dgvCarReport.Refresh();//データグリッドビューの更新
-
         }
 
         //記録者の履歴をコンボボックスへ登録(重複なし)
@@ -166,7 +178,6 @@ namespace CarReportSystem {
             if (!cbAuther.Items.Contains(author)) {
                 cbAuther.Items.Add(author);
             }
-
         }
 
         //車名の履歴をコンボボックスへ登録(重複なし)
@@ -202,11 +213,8 @@ namespace CarReportSystem {
 #pragma warning restore SYSLIB0011 // 型またはメンバーが旧型式です
                     using (FileStream fs = File.Open(sfdReportFileSave.FileName, FileMode.Create)) {
                         bf.Serialize(fs, listCarReports);
-
                     }
-
                 }
-
                 catch (Exception) {
                     tslbMessage.Text = "書き込みエラー";
                 }
@@ -216,7 +224,6 @@ namespace CarReportSystem {
         //開くボタンイベントハンドラ
         private void btReportOpen_Click(object sender, EventArgs e) {
             ReportOpenFile();
-
         }
 
         //ファイルオープン処理
@@ -236,10 +243,8 @@ namespace CarReportSystem {
                         }
                         tslbMessage.Text = "";
                     }
-
                 }
                 catch (Exception) {
-
                     tslbMessage.Text = "データが違います";
                 }
                 dgvCarReport.ClearSelection();
@@ -262,6 +267,28 @@ namespace CarReportSystem {
         private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
             if (MessageBox.Show("本当に終了しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                 Application.Exit();
+        }
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            //ダイアログを表示する
+            if (cdColor.ShowDialog() == DialogResult.OK) {
+                //選択した色を背景に登録する
+                BackColor = cdColor.Color;
+                st.MainFormColor = cdColor.Color.ToArgb();
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルのシリアル化
+            try {
+                using (var writer = XmlWriter.Create("settings.xml")) {
+                    var serializer = new XmlSerializer(st.GetType());
+                    serializer.Serialize(writer,st);
+                }
+            }
+            catch (Exception) {
+                MessageBox.Show("設定ファイル読み込みエラー");
+            }
         }
     }
 }

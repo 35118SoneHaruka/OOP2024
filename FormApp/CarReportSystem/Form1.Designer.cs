@@ -62,6 +62,7 @@
             色設定ToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             終了ToolStripMenuItem = new ToolStripMenuItem();
+            cdColor = new ColorDialog();
             groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCarReport).BeginInit();
@@ -410,6 +411,7 @@
             色設定ToolStripMenuItem.Name = "色設定ToolStripMenuItem";
             色設定ToolStripMenuItem.Size = new Size(119, 22);
             色設定ToolStripMenuItem.Text = "色設定...";
+            色設定ToolStripMenuItem.Click += 色設定ToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
@@ -427,7 +429,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(224, 224, 224);
+            BackColor = Color.WhiteSmoke;
             ClientSize = new Size(849, 637);
             Controls.Add(btClearReport);
             Controls.Add(statusStrip1);
@@ -456,6 +458,7 @@
             MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
+            FormClosed += Form1_FormClosed;
             Load += Form1_Load;
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
@@ -510,5 +513,6 @@
         private ToolStripMenuItem 色設定ToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem 終了ToolStripMenuItem;
+        private ColorDialog cdColor;
     }
 }
