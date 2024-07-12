@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace CarReportSystem {
     public partial class Form1 : Form {
 
-        Settings settings = new Settings();
+        Settings settings = Settings.getInstance();
 
     //カーレポート管理用リスト
     BindingList<CarReport> listCarReports = new BindingList<CarReport>();
