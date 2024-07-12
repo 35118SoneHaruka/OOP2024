@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace CarReportSystem {
     public partial class Form1 : Form {
 
-        Settings st = new Settings();
+        Settings settings = new Settings();
 
     //カーレポート管理用リスト
     BindingList<CarReport> listCarReports = new BindingList<CarReport>();
@@ -116,19 +116,22 @@ namespace CarReportSystem {
 
             //設定した色の読み込み
             try {
-                using (var reader = XmlReader.Create("settings.xml")) {
+                using (var reader = XmlReader.Create("setting.xml")) {
+                    //var serializer = new XmlSerializer(typeof(Settings));
+                    //var settings = serializer.Deserialize(reader) as Settings;
+                    //BackColor = Color.FromArgb(settings.MainFormColor);
+                    //settings.MainFormColor = BackColor.ToArgb();
                     var serializer = new XmlSerializer(typeof(Settings));
-                    var settings = serializer.Deserialize(reader) as Settings;
-                    if (settings != null) {
-                        if (settings.MainFormColor != 0) {
-                            BackColor = Color.FromArgb(settings.MainFormColor);
-                            st = settings;
+                    var setting = serializer.Deserialize(reader) as Settings;
+                    if (setting != null) {
+                        if (setting.MainFormColor != 0) {
+                            BackColor = Color.FromArgb(setting.MainFormColor);
+                            settings.MainFormColor = BackColor.ToArgb();
                         }
                     }
                 }
             }
             catch (Exception) {
-
             }
             
         }
@@ -274,16 +277,16 @@ namespace CarReportSystem {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 //選択した色を背景に登録する
                 BackColor = cdColor.Color;
-                st.MainFormColor = cdColor.Color.ToArgb();
+                settings.MainFormColor = cdColor.Color.ToArgb();
             }
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             //設定ファイルのシリアル化
             try {
-                using (var writer = XmlWriter.Create("settings.xml")) {
-                    var serializer = new XmlSerializer(st.GetType());
-                    serializer.Serialize(writer,st);
+                using (var writer = XmlWriter.Create("setting.xml")) {
+                    var serializer = new XmlSerializer(settings.GetType());
+                    serializer.Serialize(writer,settings);
                 }
             }
             catch (Exception) {
