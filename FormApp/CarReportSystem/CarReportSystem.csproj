@@ -6,6 +6,11 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Title>CarReportSystem</Title>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <Authors>曽根　遼</Authors>
+    <Copyright>copyright(c)</Copyright>
+    <Company>(有)藤井ー情報システム</Company>
   </PropertyGroup>
 
 </Project>

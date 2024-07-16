@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Reflection;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
@@ -10,8 +11,8 @@ namespace CarReportSystem {
 
         Settings settings = Settings.getInstance();
 
-    //カーレポート管理用リスト
-    BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+        //カーレポート管理用リスト
+        BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
         //コンストラクタ
         public Form1() {
@@ -133,7 +134,7 @@ namespace CarReportSystem {
             }
             catch (Exception) {
             }
-            
+
         }
 
         //データグリッドビューイベント
@@ -286,12 +287,18 @@ namespace CarReportSystem {
             try {
                 using (var writer = XmlWriter.Create("setting.xml")) {
                     var serializer = new XmlSerializer(settings.GetType());
-                    serializer.Serialize(writer,settings);
+                    serializer.Serialize(writer, settings);
                 }
             }
             catch (Exception) {
                 MessageBox.Show("設定ファイル読み込みエラー");
             }
+        }
+
+        private void このアプリについてToolStripMenuItem_Click(object sender, EventArgs e) {
+            var fmversion = new fmVersion();
+            
+            fmversion.ShowDialog();
         }
     }
 }
