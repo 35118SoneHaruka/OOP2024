@@ -60,7 +60,7 @@ namespace Exercise01 {
             var element = new XElement(file,
                 new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
                 new XElement("teammembers", "11"),
-                new XElement("firstplayed", "1863-10-26")
+                new XElement("firstplayed", "1863")
               );
 
             var xdoc = XDocument.Load(file);
