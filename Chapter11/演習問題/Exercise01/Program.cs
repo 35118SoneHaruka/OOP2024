@@ -61,12 +61,39 @@ namespace Exercise01 {
                 new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
                 new XElement("teammembers", "11"),
                 new XElement("firstplayed", "1863")
-              );
+            );
 
             var xdoc = XDocument.Load(file);
             xdoc.Root.Add(element);
 
             xdoc.Save(newfile);
+
+            do {
+                Console.Write("名称：");
+                var name = Console.ReadLine();
+                Console.Write("漢字：");
+                var kanji = Console.ReadLine();
+                Console.Write("人数：");
+                var member =Console.ReadLine();
+                Console.Write("起源：");
+                var firstplayed =Console.ReadLine();
+
+                element = new XElement(file,
+                new XElement("name", name, new XAttribute("kanji", kanji)),
+                new XElement("teammembers", member),
+                new XElement("firstplayed", firstplayed)
+                );
+                xdoc.Root.Add(element);
+
+                xdoc.Save(newfile);
+
+                Console.WriteLine("追加(1),保存(2)");
+                
+            } while (int.Parse(Console.ReadLine()) == 1);
+
+            
         }
+
+       
     }
 }
