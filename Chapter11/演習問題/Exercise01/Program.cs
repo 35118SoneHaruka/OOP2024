@@ -33,11 +33,11 @@ namespace Exercise01 {
 
         private static void Exercise1_2(string file) {
             var xdoc = XDocument.Load(file);
-            var xelements = xdoc.Root.Elements().OrderBy(x => (int) x.Element("firstplayed"));
+            var xelements = xdoc.Root.Elements().OrderBy(x => (int)x.Element("firstplayed"));
             foreach (var xsample in xelements) {
-                var xname =xsample.Element("name");
+                var xname = xsample.Element("name");
                 var xkanji = xname.Attribute("kanji");
-                var xfirstplayed =(int) xsample.Element("firstplayed");
+                var xfirstplayed = (int)xsample.Element("firstplayed");
                 Console.WriteLine("{0}({1})", xkanji.Value, xfirstplayed);
             }
         }
@@ -45,15 +45,28 @@ namespace Exercise01 {
         private static void Exercise1_3(string file) {
             var xdoc = XDocument.Load(file);
             var xelements = xdoc.Root.Elements().Select(x => new {
-                                                    Name = x.Element("name").Value,
-                                                    Teammenbers = x.Element("teammembers").Value
-                                                 });
-                        
-            
+                Name = x.Element("name").Value,
+                Teammembers = x.Element("teammembers").Value,
+            });
+            var xmax = xelements.Max(x => x.Teammembers);
+            foreach (var item in xelements) {
+                if(item.Teammembers == xmax) {
+                    Console.WriteLine(item.Name);
+                }
+            }
         }
 
         private static void Exercise1_4(string file, string newfile) {
+            var element = new XElement(file,
+                new XElement("name", "サッカー", new XAttribute("kanji", "蹴球")),
+                new XElement("teammembers", "11"),
+                new XElement("firstplayed", "1863-10-26")
+              );
 
+            var xdoc = XDocument.Load(file);
+            xdoc.Root.Add(element);
+
+            xdoc.Save(newfile);
         }
     }
 }
