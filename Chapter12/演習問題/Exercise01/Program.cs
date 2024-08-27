@@ -19,12 +19,13 @@ namespace Exercise01 {
 
             Exercise1_2("employees.xml");
             Exercise1_3("employees.xml");
+            Console.WriteLine(File.ReadAllText("employees.xml"));
             Console.WriteLine();
 
-            Exercise1_4("employees.json");
+            //Exercise1_4("employees.json");
 
             // これは確認用
-            Console.WriteLine(File.ReadAllText("employees.json"));
+            //Console.WriteLine(File.ReadAllText("employees.json"));
         }
 
         private static void Exercise1_1(string outfile) {
@@ -66,18 +67,25 @@ namespace Exercise01 {
                 Indent = true,
                 IndentChars = " ",
             };
-            using (var writer = XmlWriter.Create(outfile,settings)) {
+            using (var writer = XmlWriter.Create(outfile, settings)) {
                 var serializer = new DataContractSerializer(employee.GetType());
                 serializer.WriteObject(writer, employee);
             }
         }
 
         private static void Exercise1_3(string outfile) {
-            
+            using (var reader = XmlReader.Create(outfile)) {
+                var serializer = new DataContractSerializer(typeof(Employee[]));
+                var emps = serializer.ReadObject(reader)as Employee[];
+                foreach (var item in emps) {
+                    Console.WriteLine(item);
+                }
+
+            }
         }
 
         private static void Exercise1_4(string outfile) {
-            
+
         }
     }
 }
