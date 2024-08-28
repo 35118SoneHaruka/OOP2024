@@ -106,6 +106,7 @@ namespace Exercise01 {
             var options = new JsonSerializerOptions {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 WriteIndented = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             string jsonString = JsonSerializer.Serialize(employee, options);
