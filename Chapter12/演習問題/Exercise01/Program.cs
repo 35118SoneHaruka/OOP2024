@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
@@ -19,13 +22,12 @@ namespace Exercise01 {
 
             Exercise1_2("employees.xml");
             Exercise1_3("employees.xml");
-            Console.WriteLine(File.ReadAllText("employees.xml"));
             Console.WriteLine();
 
-            //Exercise1_4("employees.json");
+            Exercise1_4("employees.json");
 
             // これは確認用
-            //Console.WriteLine(File.ReadAllText("employees.json"));
+            Console.WriteLine(File.ReadAllText("employees.json"));
         }
 
         private static void Exercise1_1(string outfile) {
@@ -76,16 +78,40 @@ namespace Exercise01 {
         private static void Exercise1_3(string outfile) {
             using (var reader = XmlReader.Create(outfile)) {
                 var serializer = new DataContractSerializer(typeof(Employee[]));
-                var emps = serializer.ReadObject(reader)as Employee[];
+                var emps = serializer.ReadObject(reader) as Employee[];
                 foreach (var item in emps) {
-                    Console.WriteLine(item);
+                    Console.WriteLine("{0} {1} {2}", item.Id,item.Name,item.HireDate);
                 }
 
             }
+            
         }
 
         private static void Exercise1_4(string outfile) {
+            var employee = new Employee[] {
+                new Employee {
+                    Id = 001,
+                    Name = "sizen",
+                    HireDate = new DateTime(2004, 6, 7),
+                },
+                new Employee {
+                    Id = 002,
+                    Name = "fujii",
+                    HireDate = new DateTime(2004, 6, 5),
+                }
 
+            };
+
+
+            var options = new JsonSerializerOptions {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                WriteIndented = true,
+            };
+
+            string jsonString = JsonSerializer.Serialize(employee, options);
+            File.WriteAllText(outfile,jsonString);
+            Console.WriteLine(jsonString);
+          
         }
     }
 }
