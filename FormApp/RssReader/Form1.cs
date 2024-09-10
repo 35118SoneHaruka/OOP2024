@@ -77,20 +77,25 @@ namespace RssReader {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            try {
-                website.Add(textBox1.Text, comboBox1.Text);
-                comboBox1.Items.Add(GetKeyFromValue(website, comboBox1.Text));
-                comboBox1.Text = "";
-                textBox1.Text = "";
-                MessageBox.Show("登録が完了しました");
+            if(textBox1.Text != ""　&&  comboBox1.Text != "" && comboBox1.Text.Contains("https")) {
+                try {
+                    website.Add(textBox1.Text, comboBox1.Text);
+                    comboBox1.Items.Add(GetKeyFromValue(website, comboBox1.Text));
+                    comboBox1.Text = "";
+                    textBox1.Text = "";
+                    MessageBox.Show("登録が完了しました");
 
+                }
+                catch (ArgumentException) {
+                    MessageBox.Show("同じ名前が存在しています、違う名前を入力してください");
+                }
+                catch (Exception) {
+                    MessageBox.Show("URLまたはお気に入り名称を入力してください");
+                }
+            } else {
+                MessageBox.Show("登録名またはURLを入力してください");
             }
-            catch (ArgumentException) {
-                MessageBox.Show("同じ名前が存在しています、違う名前を入力してください");
-            }
-            catch (Exception) {
-                MessageBox.Show("URLまたはお気に入り名称を入力してください");
-            }
+            
         }
 
         static string GetKeyFromValue(Dictionary<string, string> dictionary, string value) {
@@ -122,6 +127,18 @@ namespace RssReader {
             }
             catch (Exception ex) {
                 MessageBox.Show($"エラーが発生しました: {ex.Message}");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            if (webView21.CanGoBack) {
+                webView21.GoBack();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e) {
+            if (webView21.CanGoForward) {
+                webView21.GoForward();
             }
         }
     }
