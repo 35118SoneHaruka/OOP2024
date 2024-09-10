@@ -127,7 +127,7 @@
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "RssReader";
             ((System.ComponentModel.ISupportInitialize)(this.webView21)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

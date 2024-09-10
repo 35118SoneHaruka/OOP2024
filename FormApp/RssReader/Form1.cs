@@ -25,28 +25,32 @@ namespace RssReader {
         }
 
         private void btGet_Click(object sender, EventArgs e) {
-            var text = "https";
-            if (comboBox1.Text.Contains(text)) {
-                using (var wc = new WebClient()) {
-                    var url = wc.OpenRead(comboBox1.Text);
-                    var xdoc = XDocument.Load(url);
-                    xdocs = xdoc.Root.Descendants("item").Select(item => new ItemData { Title = item.Element("title").Value, link = item.Element("link").Value }).ToList();
-                    foreach (var xdocument in xdocs) {
-                        lbRssTitle.Items.Add(xdocument.Title);
+            lbRssTitle.Items.Clear();
+            try {
+                var text = "https";
+                if (comboBox1.Text.Contains(text)) {
+                    using (var wc = new WebClient()) {
+                        var url = wc.OpenRead(comboBox1.Text);
+                        var xdoc = XDocument.Load(url);
+                        xdocs = xdoc.Root.Descendants("item").Select(item => new ItemData { Title = item.Element("title").Value, link = item.Element("link").Value }).ToList();
+                        foreach (var xdocument in xdocs) {
+                            lbRssTitle.Items.Add(xdocument.Title);
+                        }
                     }
-                }
-            } else {
-                using (var wc = new WebClient()) {
-                    var url = wc.OpenRead(website[comboBox1.Text]);
-                    var xdoc = XDocument.Load(url);
-                    xdocs = xdoc.Root.Descendants("item").Select(item => new ItemData { Title = item.Element("title").Value, link = item.Element("link").Value }).ToList();
-                    foreach (var xdocument in xdocs) {
-                        lbRssTitle.Items.Add(xdocument.Title);
+                } else {
+                    using (var wc = new WebClient()) {
+                        var url = wc.OpenRead(website[comboBox1.Text]);
+                        var xdoc = XDocument.Load(url);
+                        xdocs = xdoc.Root.Descendants("item").Select(item => new ItemData { Title = item.Element("title").Value, link = item.Element("link").Value }).ToList();
+                        foreach (var xdocument in xdocs) {
+                            lbRssTitle.Items.Add(xdocument.Title);
+                        }
                     }
                 }
             }
-
-           
+            catch (Exception) {
+                MessageBox.Show("正しいURLまたは名称を入力してください");
+            }
         }
 
         private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
@@ -71,10 +75,20 @@ namespace RssReader {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            website.Add(textBox1.Text,comboBox1.Text);
-            comboBox1.Items.Add(GetKeyFromValue(website, comboBox1.Text));
-            comboBox1.Text = "";
-            textBox1.Text = "";
+            try {
+                website.Add(textBox1.Text, comboBox1.Text);
+                comboBox1.Items.Add(GetKeyFromValue(website, comboBox1.Text));
+                comboBox1.Text = "";
+                textBox1.Text = "";
+                MessageBox.Show("登録が完了しました");
+
+            }
+            catch (ArgumentException) {
+                MessageBox.Show("同じ名前が存在しています、違う名前を入力してください");
+            }
+            catch (Exception) {
+                MessageBox.Show("URLまたはお気に入り名称を入力してください");
+            }
         }
 
         static string GetKeyFromValue(Dictionary<string, string> dictionary, string value) {
@@ -86,4 +100,5 @@ namespace RssReader {
         public string Title { get; set; }
         public string link { get; set; }
     }
+
 }
