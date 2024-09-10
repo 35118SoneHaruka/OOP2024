@@ -12,12 +12,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace RssReader {
    
 
     public partial class Form1 : Form {
-        private Dictionary<string, string> website; 
+        static List<string> immutableKeys = new List<string> { "主要", "国内", "国際", "経済", "エンタメ", "スポーツ", "IT", "科学", "地域" };
+        private Dictionary<string, string> website = new ImmutableKeyDictionary<string, string>(immutableKeys);
         private List<ItemData> xdocs;
         public Form1() {
             InitializeComponent();
@@ -94,11 +96,67 @@ namespace RssReader {
         static string GetKeyFromValue(Dictionary<string, string> dictionary, string value) {
             return dictionary.FirstOrDefault(kvp => kvp.Value == value).Key;
         }
+
+        private void button2_Click(object sender, EventArgs e) {
+            try {
+                string key = textBox1.Text;
+
+                if (string.IsNullOrEmpty(key)) {
+                    throw new ArgumentException("名称が空です");
+                }
+
+                if (website.ContainsKey(key) && immutableKeys.Contains(key)) {
+                    comboBox1.Text = "";
+                    textBox1.Text = "";
+                    throw new InvalidOperationException("初期登録は削除できません");
+                }
+
+                website.Remove(key);
+                comboBox1.Items.Remove(key);
+                comboBox1.Text = "";
+                textBox1.Text = "";
+                MessageBox.Show("削除が完了しました");
+            }
+            catch (InvalidOperationException ex) {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex) {
+                MessageBox.Show($"エラーが発生しました: {ex.Message}");
+            }
+        }
     }
 
     public class ItemData {
         public string Title { get; set; }
         public string link { get; set; }
+    }
+
+    public class ImmutableKeyDictionary<TKey, TValue> : Dictionary<TKey, TValue> {
+        private readonly HashSet<TKey> immutableKeys;
+
+        public ImmutableKeyDictionary(IEnumerable<TKey> immutableKeys) {
+            this.immutableKeys = new HashSet<TKey>(immutableKeys);
+        }
+
+        public ImmutableKeyDictionary(IDictionary<TKey, TValue> dictionary, IEnumerable<TKey> immutableKeys) : base(dictionary) {
+            this.immutableKeys = new HashSet<TKey>(immutableKeys);
+        }
+
+        public new bool Remove(TKey key) {
+            if (immutableKeys.Contains(key)) {
+                throw new InvalidOperationException($"Cannot delete immutable key: {key}");
+            }
+            return base.Remove(key);
+        }
+
+        public new void Clear() {
+            foreach (var key in immutableKeys) {
+                if (ContainsKey(key)) {
+                    throw new InvalidOperationException($"Cannot delete immutable key: {key}");
+                }
+            }
+            base.Clear();
+        }
     }
 
 }
