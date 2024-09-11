@@ -19,15 +19,18 @@ namespace RssReader {
    
 
     public partial class Form1 : Form {
+
         static List<string> immutableKeys = new List<string> { "主要", "国内", "国際", "経済", "エンタメ", "スポーツ", "IT", "科学", "地域" };
         private Dictionary<string, string> website = new ImmutableKeyDictionary<string, string>(immutableKeys);
         private List<ItemData> xdocs;
+
         public Form1() {
             InitializeComponent();
             getCombobox();
             webView21.CoreWebView2InitializationCompleted += OnWebView21InitializationCompleted;
         }
 
+        //取得ボタン
         private void btGet_Click(object sender, EventArgs e) {
             lbRssTitle.Items.Clear();
             try {
@@ -57,11 +60,13 @@ namespace RssReader {
             }
         }
 
+        //webniewに表示
         private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
             Uri websiteUri = new Uri(xdocs[lbRssTitle.SelectedIndex].link);
             webView21.Source = websiteUri;
         }
 
+        //combobox初期値登録
         private void getCombobox() {
            website = new Dictionary<string, string>() {
                {"主要","https://news.yahoo.co.jp/rss/topics/top-picks.xml" },
@@ -78,6 +83,7 @@ namespace RssReader {
             comboBox1.Items.AddRange(website.Keys.ToArray());
         }
 
+        //お気に入り登録
         private void button1_Click(object sender, EventArgs e) {
             if(textBox1.Text != ""　&&  comboBox1.Text != "" && comboBox1.Text.Contains("https")) {
                 try {
@@ -104,6 +110,7 @@ namespace RssReader {
             return dictionary.FirstOrDefault(kvp => kvp.Value == value).Key;
         }
 
+        //お気に入り削除
         private void button2_Click(object sender, EventArgs e) {
             try {
                 string key = textBox1.Text;
@@ -132,20 +139,14 @@ namespace RssReader {
             }
         }
 
+        //戻るボタン
         private void button3_Click(object sender, EventArgs e) {
             if (webView21.CanGoBack) {
                 webView21.GoBack();
-
-                var currentUrl = webView21.Source.ToString();
-
-                // 現在の URL に一致するアイテムを ListBox で選択する
-                var item = xdocs.FirstOrDefault(x => x.link == currentUrl);
-                if (item != null) {
-                    lbRssTitle.SelectedItem = item.Title;
-                }
             }
         }
 
+        //進むボタン
         private void button4_Click(object sender, EventArgs e) {
             if (webView21.CanGoForward) {
                 webView21.GoForward();
@@ -153,10 +154,7 @@ namespace RssReader {
         }
 
         private void webView21_NavigationCompleted(object sender, WebBrowserNavigatedEventArgs e) {
-            // 現在のページの URL を取得
             var currentUrl = webView21.Source.ToString();
-
-            // 現在の URL に一致するアイテムを ListBox で選択する
             var item = xdocs.FirstOrDefault(x => x.link == currentUrl);
             if (item != null) {
                 lbRssTitle.SelectedItem = item.Title;
