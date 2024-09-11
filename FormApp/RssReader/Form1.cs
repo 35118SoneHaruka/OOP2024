@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +25,7 @@ namespace RssReader {
         public Form1() {
             InitializeComponent();
             getCombobox();
+            webView21.CoreWebView2InitializationCompleted += OnWebView21InitializationCompleted;
         }
 
         private void btGet_Click(object sender, EventArgs e) {
@@ -133,6 +135,14 @@ namespace RssReader {
         private void button3_Click(object sender, EventArgs e) {
             if (webView21.CanGoBack) {
                 webView21.GoBack();
+
+                var currentUrl = webView21.Source.ToString();
+
+                // 現在の URL に一致するアイテムを ListBox で選択する
+                var item = xdocs.FirstOrDefault(x => x.link == currentUrl);
+                if (item != null) {
+                    lbRssTitle.SelectedItem = item.Title;
+                }
             }
         }
 
@@ -141,7 +151,34 @@ namespace RssReader {
                 webView21.GoForward();
             }
         }
+
+        private void webView21_NavigationCompleted(object sender, WebBrowserNavigatedEventArgs e) {
+            // 現在のページの URL を取得
+            var currentUrl = webView21.Source.ToString();
+
+            // 現在の URL に一致するアイテムを ListBox で選択する
+            var item = xdocs.FirstOrDefault(x => x.link == currentUrl);
+            if (item != null) {
+                lbRssTitle.SelectedItem = item.Title;
+            }
+        }
+
+        private async void OnWebView21InitializationCompleted(object sender, EventArgs e) {
+            webView21.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
+        }
+
+        private void CoreWebView2_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e) {
+            
+            var currentUrl = webView21.CoreWebView2.Source;
+
+            var item = xdocs.FirstOrDefault(x => x.link == currentUrl);
+            if (item != null) {
+                lbRssTitle.SelectedItem = item.Title;
+            }
+        }
     }
+
+
 
     public class ItemData {
         public string Title { get; set; }
