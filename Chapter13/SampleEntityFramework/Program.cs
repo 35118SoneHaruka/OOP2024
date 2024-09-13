@@ -54,10 +54,12 @@ namespace SampleEntityFramework {
         }
 
         private static void DisplayAllBooks() {
-            var books = GetBooks();
-            foreach (var book in books) {
-                Console.WriteLine("{0} {1} ",book.Title,book.PublishedYear);
+            using (var db = new BooksDbContext()) {
+                foreach (var book in db.Books.ToList()) {
+                    Console.WriteLine("{0} {1}　{2} ({3:yyyy/MM/dd}) ", book.Title, book.PublishedYear, book.Author.Name, book.Author.Birthday);
+                }
             }
+            
         }
 
         private static void AddAuthors() {
