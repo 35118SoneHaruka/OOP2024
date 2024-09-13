@@ -138,42 +138,6 @@ namespace RssReader {
                 MessageBox.Show($"エラーが発生しました: {ex.Message}");
             }
         }
-
-        //戻るボタン
-        private void button3_Click(object sender, EventArgs e) {
-            if (webView21.CanGoBack) {
-                webView21.GoBack();
-            }
-        }
-
-        //進むボタン
-        private void button4_Click(object sender, EventArgs e) {
-            if (webView21.CanGoForward) {
-                webView21.GoForward();
-            }
-        }
-
-        private void webView21_NavigationCompleted(object sender, WebBrowserNavigatedEventArgs e) {
-            var currentUrl = webView21.Source.ToString();
-            var item = xdocs.FirstOrDefault(x => x.link == currentUrl);
-            if (item != null) {
-                lbRssTitle.SelectedItem = item.Title;
-            }
-        }
-
-        private async void OnWebView21InitializationCompleted(object sender, EventArgs e) {
-            webView21.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
-        }
-
-        private void CoreWebView2_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e) {
-            
-            var currentUrl = webView21.CoreWebView2.Source;
-
-            var item = xdocs.FirstOrDefault(x => x.link == currentUrl);
-            if (item != null) {
-                lbRssTitle.SelectedItem = item.Title;
-            }
-        }
     }
 
 
