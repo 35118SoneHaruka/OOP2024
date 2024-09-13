@@ -9,6 +9,7 @@ namespace SampleEntityFramework {
     internal class Program {
         static void Main(string[] args) {
             AddAuthors();
+            AddBooks();
             DisplayAllBooks();
 
 
@@ -74,5 +75,25 @@ namespace SampleEntityFramework {
                 db.SaveChanges();
             }
         }
+
+        private static void AddBooks() {
+            using (var db = new BooksDbContext()) {
+                var author1 = db.Authors.Single(a => a.Name == "与謝野晶子");
+                var book1 = new Book {
+                    Title = "みだれ髪",
+                    PublishedYear = 2000,
+                    Author = author1,
+                };
+                db.Books.Add(book1);
+                var author2 = db.Authors.Single(a => a.Name == "宮沢賢治");
+                var book2 = new Book {
+                    Title = "銀河鉄道の夜",
+                    PublishedYear = 1989,
+                    Author = author2,
+                };
+                db.Books.Add(book2);
+                db.SaveChanges();
+            }
+        } 
     }
 }

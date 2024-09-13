@@ -27,7 +27,6 @@ namespace RssReader {
         public Form1() {
             InitializeComponent();
             getCombobox();
-            webView21.CoreWebView2InitializationCompleted += OnWebView21InitializationCompleted;
         }
 
         //取得ボタン
