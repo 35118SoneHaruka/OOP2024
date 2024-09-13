@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace SampleEntityFramework {
     internal class Program {
         static void Main(string[] args) {
-            AddAuthors();
-            AddBooks();
+            //AddAuthors();
+            //AddBooks();
             UpdateBooks();
             DeleteBooks();
             DisplayAllBooks();
@@ -56,7 +56,7 @@ namespace SampleEntityFramework {
         private static void DisplayAllBooks() {
             var books = GetBooks();
             foreach (var book in books) {
-                Console.WriteLine(book.Title);
+                Console.WriteLine("{0} {1} ",book.Title,book.PublishedYear);
             }
         }
 
