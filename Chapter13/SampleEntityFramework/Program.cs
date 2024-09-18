@@ -156,6 +156,12 @@ namespace SampleEntityFramework {
         }
 
         private static void Exercise1_4() {
+            using (var db = new BooksDbContext()) {
+                var books = db.Books.Include(nameof(Author)).OrderBy(b => b.PublishedYear).Take(3);
+                foreach (var book in books) {
+                    Console.WriteLine($"{ book.Title} {book.Author.Name}");
+                }
+            }
 
         }
 
