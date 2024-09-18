@@ -10,12 +10,25 @@ namespace SampleEntityFramework {
         static void Main(string[] args) {
             //AddAuthors();
             //AddBooks();
-            UpdateBooks();
-            DeleteBooks();
-            DisplayAllBooks();
-
-
+            //UpdateBooks();
+            //DeleteBooks();
+            //DisplayAllBooks();
             //InsertBooks();
+
+            Console.WriteLine();
+            Console.WriteLine("# 1.3");
+            DisplayAllBooks3();
+
+            Console.WriteLine();
+            Console.WriteLine("# 1.4");
+            Exercise1_4();
+
+            Console.WriteLine();
+            Console.WriteLine("# 1.5");
+            Exercise1_5();
+
+            Console.ReadLine(); //コンソールアプリだが F5 でデバッグ実行したいために記述
+
         }
 
         static void InsertBooks() {
@@ -131,6 +144,23 @@ namespace SampleEntityFramework {
                 }
 
             }
+        }
+
+        static void DisplayAllBooks3() {
+            using (var db = new BooksDbContext()) {
+                var books = db.Books.Where(x => x.Title.Length >= db.Books.Max(b => b.Title.Length)).ToList();
+                foreach (var book in books) {
+                    Console.WriteLine(book.Title);
+                }
+            }
+        }
+
+        private static void Exercise1_4() {
+
+        }
+
+        private static void Exercise1_5() {
+
         }
     }
 }
