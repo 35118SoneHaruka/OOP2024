@@ -15,6 +15,9 @@ namespace SampleEntityFramework {
             //DisplayAllBooks();
             //InsertBooks();
 
+            Console.WriteLine("# 1.2");
+            DisplayAllBooks();
+
             Console.WriteLine();
             Console.WriteLine("# 1.3");
             DisplayAllBooks3();
@@ -166,7 +169,17 @@ namespace SampleEntityFramework {
         }
 
         private static void Exercise1_5() {
+            using (var db = new BooksDbContext()) {
+                var authors = db.Authors.OrderByDescending(a => a.Birthday).ToList();
+                foreach (var author in authors) {
+                    Console.WriteLine("{0}",author.Name);
+                    foreach (var book in author.Books) {
+                        Console.WriteLine("  {0} {1}",book.Title,book.PublishedYear);
 
+                    }
+                }
+
+            }
         }
     }
 }
