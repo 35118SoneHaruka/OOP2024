@@ -69,6 +69,14 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_7() {
+            var catehgoryId = Library.Categories.Single(c => c.Name == "Development").Id;
+            var query = Library.Books.Where(b => b.CategoryId == catehgoryId).GroupBy(b => b.PublishedYear).OrderBy(b =>b.Key);
+            foreach (var book in query) {
+                Console.WriteLine($"#{book.Key}");
+                foreach (var item in book) {
+                    Console.WriteLine($"  {item.Title}");
+                }
+            }
 
         }
 
