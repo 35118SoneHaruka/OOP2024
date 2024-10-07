@@ -81,7 +81,7 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_8() {
-
+           // var groups = Library.Categories.GroupJoin(Library.Books,c =>c.Id,b =>b.CategoryId)
         }
     }
 }
