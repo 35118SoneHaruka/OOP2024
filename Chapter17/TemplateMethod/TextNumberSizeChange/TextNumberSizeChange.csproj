@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LineCounterProcessor.cs" />
+    <Compile Include="Framework\ITextFileService.cs" />
+    <Compile Include="Framework\TextFileProcessor.cs" />
+    <Compile Include="ToHankakuProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

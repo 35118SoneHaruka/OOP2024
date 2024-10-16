@@ -5,9 +5,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TextFileProcessor;
+using TextNumberSizeChange.Framework;
 
 namespace TextNumberSizeChange {
-    class ToHankakuProcessor : TextProcessor {
+    class ToHankakuProcessor : ITextFileService {
 
         Dictionary<char, char> numbers = new Dictionary<char, char>(){
             {'０', '0'}, {'１', '1'}, {'２', '2'}, {'３', '3'},
@@ -17,17 +18,17 @@ namespace TextNumberSizeChange {
 
         private int _count;
 
-        protected override void Initialize(string fname) {
+        public  void Initialize(string fname) {
             _count = 0;
         }
 
-        protected override void Execute(string line) {
+        public  void Execute(string line) {
             string numberLower = new string(line.Select(x => (numbers.ContainsKey(x) ? numbers[x] : x)).ToArray());
             Console.WriteLine(numberLower);
             _count++;
         }
 
-        protected override void Terminate() {
+        public  void Terminate() {
             Console.WriteLine("{0}行", _count);
         }
     }
