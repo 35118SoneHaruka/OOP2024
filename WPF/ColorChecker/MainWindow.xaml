@@ -27,16 +27,16 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="R" VerticalAlignment="Center" FontSize="20"/>
-            <Slider x:Name="rSlider" Grid.Column="1" VerticalAlignment="Center" Maximum="255" ValueChanged="Slider_ValueChanged"/>
-            <TextBox x:Name="rValue" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" MaxLength="255"/>
+            <Slider x:Name="rSlider" Grid.Column="1" VerticalAlignment="Center" Maximum="255" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
+            <TextBox x:Name="rValue" Text="{Binding ElementName=rSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" MaxLength="255"/>
 
             <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="G" VerticalAlignment="Center" FontSize="20"/>
-            <Slider x:Name="gSlider" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Maximum="255" ValueChanged="Slider_ValueChanged"/>
-            <TextBox x:Name="gValue" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" FontSize="20" MaxLength="255"/>
+            <Slider x:Name="gSlider" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Maximum="255" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
+            <TextBox x:Name="gValue" Text="{Binding ElementName=gSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" FontSize="20" MaxLength="255"/>
 
             <TextBlock HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="B" VerticalAlignment="Center" FontSize="20"/>
-            <Slider x:Name="bSlider" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Maximum="255" ValueChanged="Slider_ValueChanged"/>
-            <TextBox x:Name="bValue" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" FontSize="20" MaxLength="255"/>
+            <Slider x:Name="bSlider" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Maximum="255" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
+            <TextBox x:Name="bValue"  Grid.Column="2" Text="{Binding ElementName=bSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" VerticalAlignment="Center" FontSize="20" MaxLength="255"/>
             <ComboBox x:Name="colorSelectComboBox" Grid.Column="1" Grid.Row="3" Margin="5" VerticalAlignment="Center"/>
 
         </Grid>
@@ -45,8 +45,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="stockButton" Content="STOCK" Margin="5" Background="AliceBlue" FontSize="20"/>
-            <TextBox Grid.Row="1" Text="" Margin="5" Background="AliceBlue"/>
+            <Button x:Name="stockButton" Content="STOCK" Margin="5" Background="AliceBlue" FontSize="20" Click="stockButton_Click"/>
+            <ListBox x:Name="stockList" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5" Background="AliceBlue"/>
 
 
 
