@@ -19,6 +19,7 @@ namespace ColorChecker {
     /// </summary>
     public partial class MainWindow : Window {
 
+        //MyColor currentColor = new MyColor();
         double redValue;
         double greenValue;
         double blueValue;
@@ -28,6 +29,9 @@ namespace ColorChecker {
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+
+            //currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
+            //colorArea.Background = new SolidColorBrush(currentColor.Color);
             redValue = (int)rSlider.Value;
             rValue.Text = redValue.ToString();
             greenValue = (int)gSlider.Value;
@@ -37,10 +41,13 @@ namespace ColorChecker {
 
             colorArea.Background = new SolidColorBrush(Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue));
 
-            
+
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
+
+            //stockList.Items.Insert(0, stockButton);
+
             redValue = (int)rSlider.Value;
             greenValue = (int)gSlider.Value;
             blueValue = (int)bSlider.Value;
