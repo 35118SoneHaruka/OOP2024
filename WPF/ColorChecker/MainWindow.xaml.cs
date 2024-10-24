@@ -19,40 +19,44 @@ namespace ColorChecker {
     /// </summary>
     public partial class MainWindow : Window {
 
-        //MyColor currentColor;
-        double redValue;
-        double greenValue;
-        double blueValue;
+        MyColor currentColor;
+        //double redValue;
+        //double greenValue;
+        //double blueValue;
 
         public MainWindow() {
             InitializeComponent();
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            
-            //currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
-            //colorArea.Background = new SolidColorBrush(currentColor.Color);
-            redValue = (int)rSlider.Value;
-            greenValue = (int)gSlider.Value;
-            blueValue = (int)bSlider.Value; ;
 
-            colorArea.Background = new SolidColorBrush(Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue));
+            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
+            colorArea.Background = new SolidColorBrush(currentColor.Color);
+            //redValue = (int)rSlider.Value;
+            //greenValue = (int)gSlider.Value;
+            //blueValue = (int)bSlider.Value; ;
+
+            //colorArea.Background = new SolidColorBrush(Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue));
 
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
-
-            //stockList.Items.Insert(0,currentColor);
-            if (stockList.Items.Contains(colorArea.Background)) {
+            if (stockList.Items.Contains(currentColor)) {
                 MessageBox.Show("既に登録されています。");
             } else {
-                redValue = (int)rSlider.Value;
-                greenValue = (int)gSlider.Value;
-                blueValue = (int)bSlider.Value;
-                var color = new MyColor();
-                color.Color = Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue);
-                stockList.Items.Insert(0, color);
+                stockList.Items.Insert(0, currentColor);
             }
+            
+            //if (stockList.Items.Contains(colorArea.Background)) {
+            //    MessageBox.Show("既に登録されています。");
+            //} else {
+            //    redValue = (int)rSlider.Value;
+            //    greenValue = (int)gSlider.Value;
+            //    blueValue = (int)bSlider.Value;
+            //    var color = new MyColor();
+            //    color.Color = Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue);
+            //    stockList.Items.Insert(0, color);
+            //}
 
 
         }
