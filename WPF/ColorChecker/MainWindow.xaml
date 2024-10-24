@@ -37,7 +37,21 @@
             <TextBlock HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="B" VerticalAlignment="Center" FontSize="20"/>
             <Slider x:Name="bSlider" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Maximum="255" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged"/>
             <TextBox x:Name="bValue"  Grid.Column="2" Text="{Binding ElementName=bSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" VerticalAlignment="Center" FontSize="20" MaxLength="255"/>
-            <ComboBox x:Name="colorSelectComboBox" Grid.Column="1" Grid.Row="3" Margin="5" VerticalAlignment="Center"/>
+            <ComboBox x:Name="colorSelectComboBox" ItemsSource="{Binding}" SelectedValue="{Binding Color}" Grid.Column="1" Grid.Row="3" Margin="5" VerticalAlignment="Center" SelectionChanged="colorSelectComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="20" Height="Auto" Margin="5,0" BorderThickness="1" BorderBrush="Black"  >
+                                <Border.Background>
+                                    <SolidColorBrush Color="{Binding Color}"/>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
 
         </Grid>
         <Grid Grid.Column="2">

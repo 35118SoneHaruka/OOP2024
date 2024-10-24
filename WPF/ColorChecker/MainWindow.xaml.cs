@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +20,8 @@ namespace ColorChecker {
     /// </summary>
     public partial class MainWindow : Window {
 
+        Color color;
+        string name;
         MyColor currentColor;
         //double redValue;
         //double greenValue;
@@ -26,6 +29,18 @@ namespace ColorChecker {
 
         public MainWindow() {
             InitializeComponent();
+            currentColor.Color = Color.FromArgb(255,0,0,0);
+
+            colorSelectComboBox.DataContext = GetColorList();
+        }
+
+        /// <summary>
+        /// すべての色を取得するメソッド
+        /// </summary>
+        /// <returns></returns>
+        private MyColor[] GetColorList() {
+            return typeof(Colors).GetProperties(BindingFlags.Public | BindingFlags.Static)
+                .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
@@ -67,6 +82,15 @@ namespace ColorChecker {
                 gValue.Text =selectedColor.Color.G.ToString();
                 bValue.Text =selectedColor.Color.B.ToString();
             }
+        }
+
+        private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
+            color = mycolor.Color;
+            name = mycolor.Name;
+            rValue.Text = mycolor.Color.R.ToString();
+            gValue.Text = mycolor.Color.G.ToString();
+            bValue.Text = mycolor.Color.B.ToString();
         }
     }
 }
