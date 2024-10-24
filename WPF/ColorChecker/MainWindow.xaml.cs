@@ -19,7 +19,7 @@ namespace ColorChecker {
     /// </summary>
     public partial class MainWindow : Window {
 
-        //MyColor currentColor = new MyColor();
+        //MyColor currentColor;
         double redValue;
         double greenValue;
         double blueValue;
@@ -29,31 +29,32 @@ namespace ColorChecker {
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-
+            
             //currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
             //colorArea.Background = new SolidColorBrush(currentColor.Color);
             redValue = (int)rSlider.Value;
-            rValue.Text = redValue.ToString();
             greenValue = (int)gSlider.Value;
-            gValue.Text = greenValue.ToString();
-            blueValue = (int)bSlider.Value;
-            bValue.Text = blueValue.ToString();
+            blueValue = (int)bSlider.Value; ;
 
             colorArea.Background = new SolidColorBrush(Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue));
-
 
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
 
-            //stockList.Items.Insert(0, stockButton);
+            //stockList.Items.Insert(0,currentColor);
+            if (stockList.Items.Contains(colorArea.Background)) {
+                MessageBox.Show("既に登録されています。");
+            } else {
+                redValue = (int)rSlider.Value;
+                greenValue = (int)gSlider.Value;
+                blueValue = (int)bSlider.Value;
+                var color = new MyColor();
+                color.Color = Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue);
+                stockList.Items.Insert(0, color);
+            }
 
-            redValue = (int)rSlider.Value;
-            greenValue = (int)gSlider.Value;
-            blueValue = (int)bSlider.Value;
-            var color = new MyColor();
-            color.Color = Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue);
-            stockList.Items.Add(color);
+
         }
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {

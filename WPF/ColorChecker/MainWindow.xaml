@@ -46,7 +46,7 @@
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Button x:Name="stockButton" Content="STOCK" Margin="5" Background="AliceBlue" FontSize="20" Click="stockButton_Click"/>
-            <ListBox x:Name="stockList" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5" Background="AliceBlue" SelectionChanged="stockList_SelectionChanged"/>
+            <ListBox x:Name="stockList" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="5" Background="AliceBlue" SelectionChanged="stockList_SelectionChanged" FontFamily="MS Gothic"/>
 
 
 
