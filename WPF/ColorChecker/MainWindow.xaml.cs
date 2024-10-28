@@ -20,8 +20,6 @@ namespace ColorChecker {
     /// </summary>
     public partial class MainWindow : Window {
 
-        Color color;
-        string name;
         MyColor currentColor;
         //double redValue;
         //double greenValue;
@@ -46,6 +44,7 @@ namespace ColorChecker {
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
 
             currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
+            currentColor.Name = null;   
             colorArea.Background = new SolidColorBrush(currentColor.Color);
             //redValue = (int)rSlider.Value;
             //greenValue = (int)gSlider.Value;
@@ -77,20 +76,22 @@ namespace ColorChecker {
         }
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if(stockList.SelectedItem is MyColor selectedColor) {
-                rValue.Text =selectedColor.Color.R.ToString();
-                gValue.Text =selectedColor.Color.G.ToString();
-                bValue.Text =selectedColor.Color.B.ToString();
-            }
+            colorArea.Background = new SolidColorBrush(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
+            setSliderValue(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
+
+        }
+
+        private void setSliderValue(Color color) {
+            rSlider.Value = color.R;
+            gSlider.Value = color.G;
+            bSlider.Value = color.B;
         }
 
         private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
-            color = mycolor.Color;
-            name = mycolor.Name;
-            rValue.Text = mycolor.Color.R.ToString();
-            gValue.Text = mycolor.Color.G.ToString();
-            bValue.Text = mycolor.Color.B.ToString();
+            var tempCurrentColor = currentColor = (MyColor)((ComboBox)sender).SelectedItem;
+            setSliderValue(currentColor.Color);
+            currentColor.Name = tempCurrentColor.Name;
+            
         }
     }
 }
