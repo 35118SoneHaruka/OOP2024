@@ -21,6 +21,7 @@ namespace ColorChecker {
     public partial class MainWindow : Window {
 
         MyColor currentColor;
+        MyColor[] colorsTable;
         //double redValue;
         //double greenValue;
         //double blueValue;
@@ -29,7 +30,7 @@ namespace ColorChecker {
             InitializeComponent();
             currentColor.Color = Color.FromArgb(255,0,0,0);
 
-            colorSelectComboBox.DataContext = GetColorList();
+            colorSelectComboBox.DataContext= colorsTable = GetColorList();
         }
 
         /// <summary>
@@ -44,8 +45,20 @@ namespace ColorChecker {
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
 
             currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
-            currentColor.Name = null;   
+            int i;
+            for (i = 0; i < colorsTable.Length; i++) {
+                if (colorsTable[i].Color.Equals(currentColor.Color)) {
+                    currentColor.Name = colorsTable[i].Name;
+                    break;
+                }
+            }
+
+
+            colorSelectComboBox.SelectedIndex = i;
+            //currentColor.Name = GetColorList().Where(c => c.Color.Equals(currentColor.Color)).Select(x => x.Name).FirstOrDefault();   
             colorArea.Background = new SolidColorBrush(currentColor.Color);
+
+           
             //redValue = (int)rSlider.Value;
             //greenValue = (int)gSlider.Value;
             //blueValue = (int)bSlider.Value; ;
