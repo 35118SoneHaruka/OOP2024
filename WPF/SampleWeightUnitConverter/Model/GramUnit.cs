@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace SampleWeightUnitConverter.Model {
     public class GramUnit : WeightUnit {
         private static List<GramUnit> units = new List<GramUnit> {
-            new GramUnit{Name ="mm" ,Coefficient = 1},
-            new GramUnit{Name ="cm" ,Coefficient = 10},
+            new GramUnit{Name ="g" ,Coefficient = 1},
+            new GramUnit{Name ="kg" ,Coefficient = 1000},
         };
         public static ICollection<GramUnit> Units { get { return units; } }
 
@@ -20,7 +20,7 @@ namespace SampleWeightUnitConverter.Model {
         /// <returns></returns>
 
         public double FromPoundUnit(PoundUnit unit, double value) {
-            return (value * unit.Coefficient) * 25.4 / this.Coefficient;
+            return (value * unit.Coefficient) * 0.45 / this.Coefficient;
         }
     }
 }

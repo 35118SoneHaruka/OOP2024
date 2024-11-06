@@ -20,7 +20,7 @@ namespace SampleWeightUnitConverter.Model {
         /// <returns></returns>
 
         public double FromGramUnit(GramUnit unit, double value) {
-            return (value * unit.Coefficient) / 25.4 / this.Coefficient;
+            return (value * unit.Coefficient) / 0.45 / this.Coefficient;
         }
     }
 }
