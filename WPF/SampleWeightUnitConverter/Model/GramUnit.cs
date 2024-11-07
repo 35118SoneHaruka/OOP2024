@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleWeightUnitConverter.Model {
+namespace SampleWeightUnitConverter {
     public class GramUnit : WeightUnit {
         private static List<GramUnit> units = new List<GramUnit> {
             new GramUnit{Name ="g" ,Coefficient = 1},

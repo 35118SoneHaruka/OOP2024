@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleWeightUnitConverter.Model {
+namespace SampleWeightUnitConverter {
     public class WeightUnit {
         public string Name { get; set; }
         public double Coefficient { get; set; }

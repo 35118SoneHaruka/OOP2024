@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SampleWeightUnitConverter.Model {
+namespace SampleWeightUnitConverter {
     public class PoundUnit : WeightUnit {
         private static List<PoundUnit> units = new List<PoundUnit> {
             new PoundUnit{Name ="lb" ,Coefficient = 1},

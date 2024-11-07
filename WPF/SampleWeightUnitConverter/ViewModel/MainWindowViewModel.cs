@@ -1,5 +1,4 @@
 ﻿using SampleWeightUnitConverter;
-using SampleWeightUnitConverter.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace SampleUnitConverter {
+namespace SampleWeightUnitConverter {
     public class MainWindowViewModel : ViewModel {
         private double gramValue, poundValue;
 
