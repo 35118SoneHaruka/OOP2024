@@ -19,9 +19,9 @@
         <StackPanel Visibility="{Binding IsChecked,ElementName=CheckBox,
                                                    Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="20,0,0,0">
-            <RadioButton Content="赤"/>
-            <RadioButton Content="青"/>
-            <RadioButton Content="黄色"/>
+            <RadioButton Content="赤" Checked="RadioButton_Checked"/>
+            <RadioButton Content="青" Checked="RadioButton_Checked_1"/>
+            <RadioButton Content="黄色" Checked="RadioButton_Checked_2"/>
         </StackPanel>
 
         <Button Margin="10" Content="ボタン１" Background="{DynamicResource ButtonBrushKey}"/>
