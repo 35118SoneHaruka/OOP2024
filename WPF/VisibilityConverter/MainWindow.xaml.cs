@@ -23,18 +23,18 @@ namespace VisibilityConverter {
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e) {
-            RadioButton selectedRadioButton = (RadioButton)sender;
-            switch (selectedRadioButton.Content) {
-                case "赤":
-                    Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Red);
-                    break;
-                case "青":
-                    Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Blue);
-                    break;
-                case "緑":
-                    Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Green);
-                    break;
-            }
+            //RadioButton selectedRadioButton = (RadioButton)sender;
+            //switch (selectedRadioButton.Content) {
+            //    case "赤":
+            //        Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Red);
+            //        break;
+            //    case "青":
+            //        Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Blue);
+            //        break;
+            //    case "緑":
+            //        Resources["ButtonBrushKey"] = new SolidColorBrush(Colors.Green);
+            //        break;
+            //}
            
         }
 
