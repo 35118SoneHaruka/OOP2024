@@ -7,9 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="300">
     <Grid>
-        <StackPanel Margin="10">
-            <TextBox x:Name="NameTextBox"/>
-            <TextBox x:Name="PhoneTextBox"/>
+        <StackPanel Margin="10" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="名前" Width="50"/>
+                <TextBox x:Name="NameTextBox" Width="230"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="電話番号" Width="50"/>
+                <TextBox x:Name="PhoneTextBox" Width="230"/>
+            </StackPanel>
+
+            
             <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click"/>
             <Button Content="Read" x:Name="ReadButton" Click="ReadButton_Click"/>
         </StackPanel>
