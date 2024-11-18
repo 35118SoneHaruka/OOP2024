@@ -1,4 +1,5 @@
 ﻿using CustomerApp.Objects;
+using Microsoft.Win32;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,14 @@ namespace CustomerApp {
     /// </summary>
     public partial class MainWindow : Window {
         List<Customer> _customers;
+
+        //コンストラクタ
         public MainWindow() {
             InitializeComponent();
             ReadDatabase();
         }
 
+        //SaveButton
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
             if (NameTextBox.Text == string.Empty || PhoneTextBox.Text == string.Empty || AddressTextBox.Text == string.Empty) {
                 MessageBox.Show("すべてに文字を入力してください");
@@ -44,23 +48,30 @@ namespace CustomerApp {
             ReadDatabase();
         }
 
+        //UpdateButton
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
+            var item = CustomerListView.SelectedItem as Customer;
+            if(item == null) {
+                MessageBox.Show("更新する行を選択してください");
+                return;
+            }
             if (NameTextBox.Text == string.Empty || PhoneTextBox.Text == string.Empty || AddressTextBox.Text == string.Empty) {
                 MessageBox.Show("すべてに文字を入力してください");
                 return;
             }
-            var item = CustomerListView.SelectedItem as Customer;
+           
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Update(item);
-
-                ReadDatabase();
             }
+            ReadDatabase();
+            TextClear();
         }
 
+        //データベースの読み込み
         private void ReadDatabase() {
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
@@ -70,11 +81,13 @@ namespace CustomerApp {
             }
         }
 
+        //データベースの検索
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             var filterList = _customers.Where(x => x.Name.Contains(SearchTextBox.Text)).ToList();
             CustomerListView.ItemsSource = filterList;
         }
 
+        //DeleteButton
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
             
@@ -91,6 +104,7 @@ namespace CustomerApp {
             }
         }
 
+        //ListViewの選択
         private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var item = (Customer)CustomerListView.SelectedItem;
             if(item != null) {
@@ -99,6 +113,22 @@ namespace CustomerApp {
                 AddressTextBox.Text = item.Address;
             }
            
+        }
+
+        private void TextClear() {
+            NameTextBox.Text = string.Empty;
+            PhoneTextBox.Text = string.Empty;
+            AddressTextBox.Text = string.Empty;
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            {
+                //ファイル選択ダイアログを開く
+                if (openFileDialog.ShowDialog() == true) {
+                    roadedImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                }
+            }
         }
     }
 }
