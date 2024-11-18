@@ -27,6 +27,10 @@ namespace CustomerApp {
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
+            if (NameTextBox.Text == string.Empty || PhoneTextBox.Text == string.Empty || AddressTextBox.Text == string.Empty) {
+                MessageBox.Show("すべてに文字を入力してください");
+                return;
+            }
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
@@ -40,8 +44,21 @@ namespace CustomerApp {
             ReadDatabase();
         }
 
-        private void ReadButton_Click(object sender, RoutedEventArgs e) {
-            ReadDatabase();
+        private void UpdateButton_Click(object sender, RoutedEventArgs e) {
+            if (NameTextBox.Text == string.Empty || PhoneTextBox.Text == string.Empty || AddressTextBox.Text == string.Empty) {
+                MessageBox.Show("すべてに文字を入力してください");
+                return;
+            }
+            var item = CustomerListView.SelectedItem as Customer;
+            item.Name = NameTextBox.Text;
+            item.Phone = PhoneTextBox.Text;
+            item.Address = AddressTextBox.Text;
+            using (var connection = new SQLiteConnection(App.databasePass)) {
+                connection.CreateTable<Customer>();
+                connection.Update(item);
+
+                ReadDatabase();
+            }
         }
 
         private void ReadDatabase() {
@@ -60,6 +77,7 @@ namespace CustomerApp {
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
+            
             if(item == null) {
                 MessageBox.Show("削除する行を選択してください");
                 return;
@@ -71,6 +89,16 @@ namespace CustomerApp {
 
                 ReadDatabase();
             }
+        }
+
+        private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var item = (Customer)CustomerListView.SelectedItem;
+            if(item != null) {
+                NameTextBox.Text = item.Name;
+                PhoneTextBox.Text = item.Phone;
+                AddressTextBox.Text = item.Address;
+            }
+           
         }
     }
 }
