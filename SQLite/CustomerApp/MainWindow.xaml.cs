@@ -60,6 +60,7 @@ namespace CustomerApp {
                 connection.Insert(customer);
             }
             ReadDatabase();
+            TextClear();
         }
 
         //UpdateButton
@@ -77,6 +78,7 @@ namespace CustomerApp {
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
+            
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Update(item);
@@ -116,6 +118,7 @@ namespace CustomerApp {
 
                 ReadDatabase();
             }
+            TextClear();
         }
 
         //ListViewの選択
@@ -125,6 +128,17 @@ namespace CustomerApp {
                 NameTextBox.Text = item.Name;
                 PhoneTextBox.Text = item.Phone;
                 AddressTextBox.Text = item.Address;
+                if (item.Image != null && item.Image.Length > 0) {
+                    var image = new BitmapImage();
+                    using (var memoryStream = new System.IO.MemoryStream(item.Image)) {
+                        image.BeginInit();
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.StreamSource = memoryStream;
+                        image.EndInit();
+                    }
+
+                    LoadedImage.Source = image;
+                }
             }
            
         }
@@ -133,6 +147,7 @@ namespace CustomerApp {
             NameTextBox.Text = string.Empty;
             PhoneTextBox.Text = string.Empty;
             AddressTextBox.Text = string.Empty;
+            LoadedImage.Source = null;
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
