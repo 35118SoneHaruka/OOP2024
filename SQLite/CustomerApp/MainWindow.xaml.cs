@@ -35,10 +35,24 @@ namespace CustomerApp {
                 MessageBox.Show("すべてに文字を入力してください");
                 return;
             }
+            byte[] imageBytes = null;
+
+            if (LoadedImage.Source != null) {
+                var bitmapImage = LoadedImage.Source as BitmapImage;
+                if (bitmapImage != null) {
+                    using (var memoryStream = new System.IO.MemoryStream()) {
+                        BitmapEncoder encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                        encoder.Save(memoryStream);
+                        imageBytes = memoryStream.ToArray();
+                    }
+                }
+            }
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
+                Image = imageBytes,
             };
 
             using(var connection = new SQLiteConnection(App.databasePass)) {
@@ -127,7 +141,7 @@ namespace CustomerApp {
             {
                 //ファイル選択ダイアログを開く
                 if (openFileDialog.ShowDialog() == true) {
-                    roadedImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                    LoadedImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 }
             }
         }
