@@ -123,6 +123,7 @@ namespace CustomerApp {
 
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
             {
                 //ファイル選択ダイアログを開く
                 if (openFileDialog.ShowDialog() == true) {
