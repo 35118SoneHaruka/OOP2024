@@ -22,6 +22,7 @@ namespace CustomerApp {
     /// </summary>
     public partial class MainWindow : Window {
         List<Customer> _customers;
+        
 
         //コンストラクタ
         public MainWindow() {
@@ -35,6 +36,12 @@ namespace CustomerApp {
                 MessageBox.Show("すべてに文字を入力してください");
                 return;
             }
+
+            if(LoadedImage.Source == null) {
+                MessageBox.Show("画像を選択してください");
+                return;
+            }
+
             byte[] imageBytes = null;
 
             if (LoadedImage.Source != null) {
@@ -74,10 +81,29 @@ namespace CustomerApp {
                 MessageBox.Show("すべてに文字を入力してください");
                 return;
             }
-           
+            if (LoadedImage.Source == null) {
+                MessageBox.Show("画像を選択してください");
+                return;
+            }
+
+            byte[] imageBytes = null;
+
+            if (LoadedImage.Source != null) {
+                var bitmapImage = LoadedImage.Source as BitmapImage;
+                if (bitmapImage != null) {
+                    using (var memoryStream = new System.IO.MemoryStream()) {
+                        BitmapEncoder encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                        encoder.Save(memoryStream);
+                        imageBytes = memoryStream.ToArray();
+                    }
+                }
+            }
+
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
+            item.Image = imageBytes;
             
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
@@ -159,6 +185,10 @@ namespace CustomerApp {
                     LoadedImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 }
             }
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e) {
+            LoadedImage.Source = null;
         }
     }
 }
