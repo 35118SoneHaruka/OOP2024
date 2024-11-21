@@ -131,20 +131,26 @@ namespace CustomerApp {
 
         //DeleteButton
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            var item = CustomerListView.SelectedItem as Customer;
-            
-            if(item == null) {
-                MessageBox.Show("削除する行を選択してください");
+            if(MessageBoxResult.Yes == MessageBox.Show("削除しますか？", "確認", MessageBoxButton.YesNo)) {
+                var item = CustomerListView.SelectedItem as Customer;
+
+                if (item == null) {
+                    MessageBox.Show("削除する行を選択してください");
+                    return;
+                }
+
+                using (var connection = new SQLiteConnection(App.databasePass)) {
+                    connection.CreateTable<Customer>();
+                    connection.Delete(item);
+
+                    ReadDatabase();
+                }
+                TextClear();
+            } else {
+                TextClear();
                 return;
             }
-
-            using (var connection = new SQLiteConnection(App.databasePass)) {
-                connection.CreateTable<Customer>();
-                connection.Delete(item);
-
-                ReadDatabase();
-            }
-            TextClear();
+            
         }
 
         //ListViewの選択
