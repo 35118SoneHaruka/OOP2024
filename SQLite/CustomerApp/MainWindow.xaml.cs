@@ -81,10 +81,10 @@ namespace CustomerApp {
                 MessageBox.Show("すべてに文字を入力してください");
                 return;
             }
-            if (LoadedImage.Source == null) {
-                MessageBox.Show("画像を選択してください");
-                return;
-            }
+            //if (LoadedImage.Source == null) {
+            //    MessageBox.Show("画像を選択してください");
+            //    return;
+            //}
 
             byte[] imageBytes = null;
 
@@ -97,14 +97,14 @@ namespace CustomerApp {
                         encoder.Save(memoryStream);
                         imageBytes = memoryStream.ToArray();
                     }
-                }
+                } 
             }
 
             item.Name = NameTextBox.Text;
             item.Phone = PhoneTextBox.Text;
             item.Address = AddressTextBox.Text;
             item.Image = imageBytes;
-            
+
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Update(item);
@@ -176,6 +176,7 @@ namespace CustomerApp {
             PhoneTextBox.Text = string.Empty;
             AddressTextBox.Text = string.Empty;
             LoadedImage.Source = null;
+            SearchTextBox.Text = string.Empty;
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e) {
