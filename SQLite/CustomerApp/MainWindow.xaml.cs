@@ -199,5 +199,9 @@ namespace CustomerApp {
         private void ClearButton_Click(object sender, RoutedEventArgs e) {
             LoadedImage.Source = null;
         }
+
+        private void ClearTextButton_Click(object sender, RoutedEventArgs e) {
+            TextClear();
+        }
     }
 }
