@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CustomerApp"
         mc:Ignorable="d"
-        Title="CustomerApp" Height="380" Width="600" ResizeMode="NoResize">
+        Title="CustomerApp" Height="380" Width="700" ResizeMode="NoResize">
     <Grid Margin="0,0,0,13">
         
         <Grid.ColumnDefinitions>
@@ -32,9 +32,9 @@
                 <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1"/>
             </Grid>
 
-            <Button Content="登録" x:Name="SaveButton" Click="SaveButton_Click"/>
-            <Button Content="削除" x:Name="DeleteButton" Click="DeleteButton_Click"/>
-            <Button Content="更新" x:Name="UpdateButton" Click="UpdateButton_Click"/>
+            <Button Content="登録" x:Name="SaveButton" Background="AliceBlue" Click="SaveButton_Click"/>
+            <Button Content="更新" x:Name="UpdateButton" Background="AliceBlue" Click="UpdateButton_Click"/>
+            <Button Content="削除" x:Name="DeleteButton" Background="Red" Foreground="White"  Click="DeleteButton_Click"/>
 
             <TextBox x:Name="SearchTextBox" FontSize="20" TextChanged="SearchTextBox_TextChanged"/>
             <Grid Margin="0,5,0,0">
@@ -53,24 +53,45 @@
                 </Grid>
                 <Image x:Name="LoadedImage" Height="100" Margin="0,5,0,0" Grid.Column="1"/>
             </Grid>
-
-            
         </StackPanel>
+        
         <StackPanel Grid.Column="1">
-            <ListView x:Name="CustomerListView" Margin="0,10,10,0" Height="315" SelectionChanged="CustomerListView_SelectionChanged" SelectionMode="Single">
+            <Grid Margin="0,0,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="0"/>
+                <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="1"/>
+                <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2"/>
+                <Border BorderBrush="Gray" BorderThickness="1" Grid.Column="3"/>
+                <TextBlock Text="名前" Grid.Column="0" HorizontalAlignment="Center"/>
+                <TextBlock Text="電話番号" Grid.Column="1" HorizontalAlignment="Center"/>
+                <TextBlock Text="住所" Grid.Column="2" HorizontalAlignment="Center"/>
+                <TextBlock Text="画像" Grid.Column="3" HorizontalAlignment="Center"/>
+            </Grid>
+            <ListView x:Name="CustomerListView" Margin="0,0,5,0" Height="315" Width="345" SelectionChanged="CustomerListView_SelectionChanged" SelectionMode="Single">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel  Width="100">
-                                <TextBlock Text="{Binding Id}"/>
-                                <TextBlock Text="{Binding Name}" FontSize="20"/>
-                                <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
-                                <TextBlock Text="{Binding Address}" Foreground="Green"/>
+                        <Grid>
+                            <StackPanel Width="345">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="2.5*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition Width="0.4*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}" Grid.Column="0"/>
+                                    <TextBlock Text="{Binding Phone}" Foreground="Blue" Grid.Column="1"/>
+                                    <TextBlock Text="{Binding Address}" Foreground="Green" Grid.Column="2"/>
+                                    <Image Source="{Binding Image}" Margin="0,0,5,0" Grid.Column="3"/>
+                                </Grid>
                             </StackPanel>
-                            <StackPanel>
-                                <Image Source="{Binding Image}" Margin="30,0,0,0" Height="100" Width="100"/>
-                            </StackPanel>
-                        </StackPanel>
+                        </Grid>
 
                     </DataTemplate>
                 </ListView.ItemTemplate>
