@@ -37,10 +37,10 @@ namespace CustomerApp {
                 return;
             }
 
-            if(LoadedImage.Source == null) {
-                MessageBox.Show("画像を選択してください");
-                return;
-            }
+            //if(LoadedImage.Source == null) {
+            //    MessageBox.Show("画像を選択してください");
+            //    return;
+            //}
 
             byte[] imageBytes = null;
 
@@ -154,7 +154,7 @@ namespace CustomerApp {
                 NameTextBox.Text = item.Name;
                 PhoneTextBox.Text = item.Phone;
                 AddressTextBox.Text = item.Address;
-                if (item.Image != null && item.Image.Length > 0) {
+                if (item.Image != null) {
                     var image = new BitmapImage();
                     using (var memoryStream = new System.IO.MemoryStream(item.Image)) {
                         image.BeginInit();
@@ -164,6 +164,8 @@ namespace CustomerApp {
                     }
 
                     LoadedImage.Source = image;
+                } else {
+                    LoadedImage.Source = null;
                 }
             }
            
