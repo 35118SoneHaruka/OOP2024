@@ -37,11 +37,6 @@ namespace CustomerApp {
                 return;
             }
 
-            //if(LoadedImage.Source == null) {
-            //    MessageBox.Show("画像を選択してください");
-            //    return;
-            //}
-
             byte[] imageBytes = null;
 
             if (LoadedImage.Source != null) {
@@ -81,10 +76,6 @@ namespace CustomerApp {
                 MessageBox.Show("すべてに文字を入力してください");
                 return;
             }
-            //if (LoadedImage.Source == null) {
-            //    MessageBox.Show("画像を選択してください");
-            //    return;
-            //}
 
             byte[] imageBytes = null;
 
